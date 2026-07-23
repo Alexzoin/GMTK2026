@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://t63kgtutb8i8"]
+
+[ext_resource type="Script" uid="uid://bwepni3gvjo62" path="res://Scripts/wave.gd" id="1_sj2kr"]
+[ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="2_b0rdg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sj2kr"]
+resource_local_to_scene = true
+shader = ExtResource("2_b0rdg")
+shader_parameter/stripes = 4.82
+shader_parameter/stripe_thickness = 1.33
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = -0.2
+shader_parameter/spin = 0.05
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(1, 1, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 0)
+
+[node name="WaveCanvas" type="CanvasLayer" unique_id=894527723]
+script = ExtResource("1_sj2kr")
+background_color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1047508321]
+material = SubResource("ShaderMaterial_sj2kr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

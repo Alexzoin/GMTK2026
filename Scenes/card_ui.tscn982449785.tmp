@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://cb3w4ic4p4nk8"]
+
+[ext_resource type="PackedScene" uid="uid://cbkulcdb3k8uy" path="res://Scenes/card.tscn" id="1_lgc0u"]
+
+[node name="Card UI" type="CanvasLayer" unique_id=542603436]
+
+[node name="Hand" type="Node" parent="." unique_id=572666902]
+
+[node name="Card" parent="Hand" unique_id=1457428720 instance=ExtResource("1_lgc0u")]
+offset_left = 424.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 92.0
+
+[node name="Card2" parent="Hand" unique_id=1222626534 instance=ExtResource("1_lgc0u")]
+offset_left = 424.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 92.0
+
+[node name="Card3" parent="Hand" unique_id=614337755 instance=ExtResource("1_lgc0u")]
+offset_left = 424.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 92.0
+
+[node name="Card4" parent="Hand" unique_id=638172459 instance=ExtResource("1_lgc0u")]
+offset_left = 424.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 92.0
+
+[node name="Card5" parent="Hand" unique_id=434565704 instance=ExtResource("1_lgc0u")]
+offset_left = 424.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 92.0
+
+[node name="Card6" parent="Hand" unique_id=977408686 instance=ExtResource("1_lgc0u")]
+offset_left = 424.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 92.0
+
+[node name="Card7" parent="Hand" unique_id=1218187680 instance=ExtResource("1_lgc0u")]
+offset_left = 424.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 92.0
+
+[node name="Card8" parent="Hand" unique_id=567145851 instance=ExtResource("1_lgc0u")]
+offset_left = 424.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 92.0
+
+[node name="Card9" parent="Hand" unique_id=1149815394 instance=ExtResource("1_lgc0u")]
+offset_left = 424.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 92.0
+
+[node name="Card10" parent="Hand" unique_id=1244738359 instance=ExtResource("1_lgc0u")]
+offset_left = 424.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 92.0
+
+[node name="Deck" type="Node" parent="." unique_id=2117862073]
+
+[node name="Field" type="Node" parent="." unique_id=382339863]
+
+[node name="Discard" type="Node" parent="." unique_id=376328325]

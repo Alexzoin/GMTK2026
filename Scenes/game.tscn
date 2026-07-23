@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://e33vtaq34lpv"]
+
+[ext_resource type="PackedScene" uid="uid://t63kgtutb8i8" path="res://Scenes/wave.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://cb3w4ic4p4nk8" path="res://Scenes/card_ui.tscn" id="2_qxrlw"]
+
+[node name="Node2D" type="Node2D" unique_id=1792374812]
+
+[node name="WaveCanvas" parent="." unique_id=894527723 instance=ExtResource("1_ebmjs")]
+layer = -100
+stripe_thickness = 0.3
+bendyness = 0.1
+wave_frequency = 1.0
+shrink = 25.1
+stripe_color = Color(1, 1, 0, 1)
+background_color = Color(0, 0, 0, 0)
+smooth_edge = true
+
+[node name="WaveCanvas2" parent="." unique_id=403484869 instance=ExtResource("1_ebmjs")]
+layer = -100
+stripe_thickness = 0.3
+bendyness = 0.1
+wave_rotation = 0.1
+wave_frequency = 1.0
+shrink = 25.1
+stripe_color = Color(0, 1, 0, 1)
+background_color = Color(0, 0, 0, 0)
+smooth_edge = true
+
+[node name="WaveCanvas3" parent="." unique_id=2087523465 instance=ExtResource("1_ebmjs")]
+layer = -100
+bendyness = 0.1
+wave_rotation = 0.3
+wave_frequency = 1.0
+shrink = 25.1
+stripe_color = Color(1, 0, 1, 1)
+background_color = Color(0, 0, 0, 0)
+smooth_edge = true
+
+[node name="WaveCanvas4" parent="." unique_id=870430326 instance=ExtResource("1_ebmjs")]
+layer = -100
+bendyness = 0.1
+wave_rotation = 0.4
+spin = 0.1
+wave_frequency = 1.0
+shrink = 25.1
+stripe_color = Color(0, 1, 1, 1)
+background_color = Color(0, 0, 0, 0)
+smooth_edge = true
+
+[node name="Card UI" parent="." unique_id=542603436 instance=ExtResource("2_qxrlw")]
