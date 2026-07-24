@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cbkulcdb3k8uy"]
 
 [ext_resource type="Texture2D" uid="uid://dia2bwgbyiu1k" path="res://Images/card_mask_128x128_ffffff (1).png" id="1_brehn"]
-[ext_resource type="Script" uid="uid://gweyal8iqebd" path="res://Scripts/card_controller.gd" id="1_e6po8"]
+[ext_resource type="Script" uid="uid://bg4remi438omw" path="res://Scripts/item_controller.gd" id="2_bnspj"]
 [ext_resource type="Texture2D" uid="uid://dul2gtpe82lb1" path="res://Images/card_mask_128x128_ffffff.png" id="2_wf8id"]
 [ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="3_bnspj"]
 [ext_resource type="Texture2D" uid="uid://c62cs0p6r37b0" path="res://Images/icon.svg" id="4_eumee"]
@@ -21,7 +21,7 @@ shader_parameter/stripe_color = Color(1, 0, 1, 1)
 shader_parameter/background_color = Color(0, 0, 0, 1)
 shader_parameter/smooth_edge = true
 
-[node name="Card" type="TextureButton" unique_id=1222626534 node_paths=PackedStringArray("content", "letter_text", "number_text", "score_text", "card_image")]
+[node name="Item" type="TextureButton" unique_id=1222626534]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(128, 128)
 offset_left = -64.0
@@ -31,17 +31,12 @@ offset_bottom = 64.0
 pivot_offset = Vector2(64, 64)
 focus_mode = 0
 texture_normal = ExtResource("2_wf8id")
-script = ExtResource("1_e6po8")
-content = NodePath("Content")
-letter_text = NodePath("Content/Letter")
-number_text = NodePath("Content/Number")
-score_text = NodePath("Content/Score")
-card_image = NodePath("Content/Image")
+script = ExtResource("2_bnspj")
 
 [node name="Content" type="Node2D" parent="." unique_id=114111459]
 position = Vector2(64, 64)
 
-[node name="Score" type="RichTextLabel" parent="Content" unique_id=2018329301]
+[node name="Name" type="RichTextLabel" parent="Content" unique_id=2018329301]
 offset_left = -57.0
 offset_top = -136.0
 offset_right = 57.0
@@ -54,7 +49,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("6_bnspj")
 theme_override_font_sizes/normal_font_size = 51
-text = "999"
+text = "Item"
 scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
@@ -76,34 +71,3 @@ texture = ExtResource("4_eumee")
 [node name="Back" type="Sprite2D" parent="Content" unique_id=1326832101]
 visible = false
 texture = ExtResource("2_wf8id")
-
-[node name="Letter" type="RichTextLabel" parent="Content" unique_id=782596592]
-self_modulate = Color(1, 0, 1, 1)
-offset_left = -56.0
-offset_top = -78.0
-offset_right = 18.0
-offset_bottom = 13.0
-pivot_offset_ratio = Vector2(0.5, 0.5)
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("6_bnspj")
-theme_override_font_sizes/normal_font_size = 65
-text = "W"
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Number" type="RichTextLabel" parent="Content" unique_id=985520281]
-self_modulate = Color(1, 0, 1, 1)
-offset_top = -13.0
-offset_right = 59.0
-offset_bottom = 57.0
-pivot_offset_ratio = Vector2(0.5, 0.5)
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("6_bnspj")
-theme_override_font_sizes/normal_font_size = 51
-text = "9"
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1

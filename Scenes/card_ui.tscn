@@ -10,10 +10,10 @@ pile = NodePath("Pile")
 discard = NodePath("Discard")
 
 [node name="Deck" type="Node2D" parent="." unique_id=1182850261]
-position = Vector2(1091, 588)
+position = Vector2(1028, 485)
 
 [node name="Pile" type="Node2D" parent="." unique_id=115575918]
-position = Vector2(577, 240)
+position = Vector2(96, 115)
 
 [node name="Discard" type="Node2D" parent="." unique_id=1514210342]
 

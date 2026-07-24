@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://cd74kw84il2e7"]
+
+[ext_resource type="Texture2D" uid="uid://dul2gtpe82lb1" path="res://Images/card_mask_128x128_ffffff.png" id="1_6xj51"]
+[ext_resource type="Script" uid="uid://bg4remi438omw" path="res://Scripts/item_controller.gd" id="2_tfi04"]
+[ext_resource type="FontFile" uid="uid://dwymim4r40o5x" path="res://Fonts/Matemasie-Regular.ttf" id="3_s1xv6"]
+[ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="4_es3ov"]
+[ext_resource type="Texture2D" uid="uid://dia2bwgbyiu1k" path="res://Images/card_mask_128x128_ffffff (1).png" id="5_lnlqy"]
+[ext_resource type="Texture2D" uid="uid://c62cs0p6r37b0" path="res://Images/icon.svg" id="6_akaka"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnspj"]
+resource_local_to_scene = true
+shader = ExtResource("4_es3ov")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(1, 0, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[node name="Item" type="TextureButton" unique_id=1222626534]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(64, 64)
+focus_mode = 0
+texture_normal = ExtResource("1_6xj51")
+script = ExtResource("2_tfi04")
+
+[node name="Content" type="Node2D" parent="." unique_id=114111459]
+position = Vector2(64, 64)
+
+[node name="Score" type="RichTextLabel" parent="Content" unique_id=2018329301]
+offset_left = -57.0
+offset_top = -136.0
+offset_right = 57.0
+offset_bottom = -66.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("3_s1xv6")
+theme_override_font_sizes/normal_font_size = 51
+text = "999"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Background" type="Sprite2D" parent="Content" unique_id=569854643]
+self_modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_bnspj")
+texture = ExtResource("1_6xj51")
+
+[node name="Frame" type="Sprite2D" parent="Content" unique_id=821193798]
+self_modulate = Color(1, 0, 1, 1)
+texture = ExtResource("5_lnlqy")
+
+[node name="Image" type="Sprite2D" parent="Content" unique_id=1545964741]
+visible = false
+texture = ExtResource("6_akaka")
+
+[node name="Back" type="Sprite2D" parent="Content" unique_id=1326832101]
+visible = false
+texture = ExtResource("1_6xj51")
+
+[node name="Letter" type="RichTextLabel" parent="Content" unique_id=782596592]
+self_modulate = Color(1, 0, 1, 1)
+offset_left = -56.0
+offset_top = -78.0
+offset_right = 18.0
+offset_bottom = 13.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_s1xv6")
+theme_override_font_sizes/normal_font_size = 65
+text = "W"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="RichTextLabel" parent="Content" unique_id=985520281]
+self_modulate = Color(1, 0, 1, 1)
+offset_top = -13.0
+offset_right = 59.0
+offset_bottom = 57.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_s1xv6")
+theme_override_font_sizes/normal_font_size = 51
+text = "9"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

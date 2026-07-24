@@ -32,7 +32,7 @@ var is_playable: int:
 		if pile_parent.get_child_count() == 0:
 			return true
 		else:
-			return true
+			#return true
 			return card_value < pile_parent.get_child(-1).card_value
 
 var is_dragging: bool = false
@@ -65,6 +65,7 @@ var active_tween: Tween = null
 
 var letter: String = ""
 var number: int = -1
+var color: Color
 
 var time = 0.0
 
@@ -113,9 +114,10 @@ func init_card(letter: String = "", num: int = -1, color: Color = Color.WHITE) -
 	number_text.position.y += randf_range(-5, 5)
 	number_text.position.x += randf_range(-5, 5)
 	
-	_set_color(color)
+	set_color(color)
 	
-func _set_color(color: Color) -> void:
+func set_color(color: Color) -> void:
+	self.color = color
 	letter_text.self_modulate = color
 	number_text.self_modulate = color
 	for node in content.get_children():
@@ -148,6 +150,7 @@ func _process(delta: float) -> void:
 	var velocity = (global_position - last_pos) / delta
 	last_pos = global_position
 	
+	var base_move_speed = move_speed
 	var base_target_scale: float = default_scale
 	if is_dragging:
 		base_target_scale = dragging_scale
@@ -156,7 +159,9 @@ func _process(delta: float) -> void:
 	elif in_hand:
 		base_target_scale = hand_scale
 	elif in_pile:
-		base_target_scale = 0.8
+		base_target_scale = hover_scale
+	elif in_deck:
+		base_move_speed = move_speed / 10.0
 	
 	var target_scale = Vector2(base_target_scale, base_target_scale)
 	
@@ -201,16 +206,17 @@ func _process(delta: float) -> void:
 			#canvas_shader.set_shader_parameter("wave_strength", 0)
 			#canvas_shader.set_shader_parameter("swirl_strength", 0)
 	elif in_deck:
-		target_pos = deck_parent.global_position
+		var num = deck_parent.get_child_count() - get_index()
+		target_pos = Vector2(num * 10.0, sin(num) * 10.0) + deck_parent.global_position
 		target_pos = target_pos - pivot_offset * scale
 	elif in_pile:
-		target_pos = pile_parent.global_position + Vector2.ONE * get_index() * 10.0
+		target_pos = pile_parent.global_position + Vector2.RIGHT * get_index() * 10.0
 		target_pos = target_pos - pivot_offset * scale
 		
 		if pile_parent.get_child(-1) == self:
-			score_text.position = score_text.position.lerp(score_text_start_pos, move_speed * delta)
+			score_text.position = score_text.position.lerp(score_text_start_pos, base_move_speed * delta)
 		else:
-			score_text.position = score_text.position.lerp(score_text_hidden_pos, move_speed * delta)
+			score_text.position = score_text.position.lerp(score_text_hidden_pos, base_move_speed * delta)
 	elif in_discard:
 		pass
 			
@@ -220,7 +226,7 @@ func _process(delta: float) -> void:
 	if limit_to_screen:
 		target_pos = (target_pos).clamp(Vector2.ZERO, limit)
 		
-	global_position = global_position.lerp(target_pos, move_speed * delta)
+	global_position = global_position.lerp(target_pos, base_move_speed * delta)
 
 func play_card():
 	if not is_playable:
@@ -230,8 +236,9 @@ func play_card():
 	z_index = 0
 	scale = scale / 2.0
 	card_played.emit(self)
+	
 	if active_tween:
-		active_tween.cancel_free()
+		active_tween.kill()
 		active_tween = null
 	
 	#var tween = create_tween()
@@ -280,7 +287,7 @@ func _on_mouse_entered() -> void:
 		z_index = 1
 		
 		if active_tween:
-			active_tween.cancel_free()
+			active_tween.kill()
 			
 		var tween = create_tween()
 		tween.set_trans(Tween.TRANS_ELASTIC)
@@ -297,7 +304,7 @@ func _on_mouse_exited() -> void:
 		z_index = 0
 		
 		if active_tween:
-			active_tween.cancel_free()
+			active_tween.kill()
 		
 		var tween = create_tween()
 		tween.set_trans(Tween.TRANS_ELASTIC)

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://mbs10u4gyosi"]
+
+[ext_resource type="Script" uid="uid://cf2mdovsw1dgu" path="res://Scripts/ui_controller.gd" id="1_bolru"]
+[ext_resource type="FontFile" uid="uid://dwymim4r40o5x" path="res://Fonts/Matemasie-Regular.ttf" id="2_n8k6l"]
+
+[node name="ui_canvas" type="CanvasLayer" unique_id=406754162]
+script = ExtResource("1_bolru")
+
+[node name="Die Button" type="Button" parent="." unique_id=1839331007]
+offset_left = 1044.0
+offset_top = 292.0
+offset_right = 1080.0
+offset_bottom = 324.0
+focus_mode = 0
+text = "Die"
+
+[node name="Live Again Button" type="Button" parent="." unique_id=1600155047]
+offset_left = 1036.0
+offset_top = 334.0
+offset_right = 1110.0
+offset_bottom = 366.0
+focus_mode = 0
+text = "Rebirth"
+
+[node name="Current Points Label" type="RichTextLabel" parent="." unique_id=1441843859]
+offset_left = 1000.0
+offset_top = 33.0
+offset_right = 1114.0
+offset_bottom = 103.0
+rotation = 0.33612597
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_n8k6l")
+theme_override_font_sizes/normal_font_size = 51
+text = "999"
+scroll_active = false
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Die Button" to="." method="_on_die_button_pressed"]
+[connection signal="pressed" from="Live Again Button" to="." method="_on_live_again_button_pressed"]

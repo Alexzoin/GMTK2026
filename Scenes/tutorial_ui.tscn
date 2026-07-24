@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://dlobd5wk8sk3l"]
+
+[ext_resource type="Script" uid="uid://b2saqbe5u3328" path="res://Scripts/tutorial.gd" id="1_ryvqc"]
+[ext_resource type="FontFile" uid="uid://dwymim4r40o5x" path="res://Fonts/Matemasie-Regular.ttf" id="2_tpiwi"]
+
+[node name="tutorial_ui" type="CanvasLayer" unique_id=332380429 node_paths=PackedStringArray("show_text_at_card_number", "kill_text")]
+script = ExtResource("1_ryvqc")
+show_text_at_card_number = {
+0: NodePath("PlayCards"),
+1: NodePath("LowerCards"),
+2: NodePath("LowerCards2"),
+3: NodePath("PlayAllCards"),
+5: NodePath("DrawBackUp")
+}
+kill_text = NodePath("Kill You")
+
+[node name="PlayCards" type="RichTextLabel" parent="." unique_id=1391292596]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -541.0
+offset_top = 84.5
+offset_right = -284.96967
+offset_bottom = 276.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.11645864
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_tpiwi")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Click and drag [color=magenta]cards[/color] from your hand up to play them!"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LowerCards" type="RichTextLabel" parent="." unique_id=1762227979]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -354.0
+offset_top = -299.0
+offset_right = -77.21289
+offset_bottom = -150.29349
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.025789134
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_tpiwi")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "You can only play [color=green]cards[/color] that [wave amp=50.0 freq=10.0]c o u n t  d o w n![/wave]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LowerCards2" type="RichTextLabel" parent="." unique_id=1135308303]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -568.0
+offset_top = -116.0
+offset_right = -291.2129
+offset_bottom = 32.706512
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.1883761
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_tpiwi")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Each new [color=aqua]card[/color] must have a [shake rate=20.0 level=8]lower[/shake] value."
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayAllCards" type="RichTextLabel" parent="." unique_id=921216897]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 289.99994
+offset_top = -69.999985
+offset_right = 544.8142
+offset_bottom = 125.76825
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.16326681
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_tpiwi")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "To win you must play [shake rate=30.0 level=19]ALL[/shake] of the [color=purple]cards[/color] in the deck!"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DrawBackUp" type="RichTextLabel" parent="." unique_id=808179349]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -254.0
+offset_top = 46.0
+offset_right = 280.1261
+offset_bottom = 165.60486
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.06265752
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_tpiwi")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "When you run out of [color=orange]cards[/color] you draw back up to [tornado radius=5.0 freq=3.0]your hand size[/tornado]."
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Kill You" type="RichTextLabel" parent="." unique_id=1348684155]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -97.0
+offset_right = 242.6543
+offset_bottom = 22.604858
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.098414764
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_tpiwi")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "If you can't play any of your [color=yellow]cards[/color] [shake rate=30.0 level=25]I KILL YOU.[/shake]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
