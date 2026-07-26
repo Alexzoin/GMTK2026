@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cb3w4ic4p4nk8"]
 
 [ext_resource type="Script" uid="uid://c2uoe8uk57s0y" path="res://Scripts/card_manager.gd" id="1_y8epe"]
+[ext_resource type="Script" uid="uid://dv7mq6chk3qhp" path="res://Scenes/pile.gd" id="2_y8epe"]
 
 [node name="Card UI" type="CanvasLayer" unique_id=542603436 node_paths=PackedStringArray("hand", "deck", "pile", "discard")]
 script = ExtResource("1_y8epe")
@@ -9,12 +10,14 @@ deck = NodePath("Deck")
 pile = NodePath("Pile")
 discard = NodePath("Discard")
 
+[node name="Discard" type="Node2D" parent="." unique_id=1514210342]
+position = Vector2(1083, 82)
+
 [node name="Deck" type="Node2D" parent="." unique_id=1182850261]
 position = Vector2(1028, 485)
 
 [node name="Pile" type="Node2D" parent="." unique_id=115575918]
 position = Vector2(96, 115)
-
-[node name="Discard" type="Node2D" parent="." unique_id=1514210342]
+script = ExtResource("2_y8epe")
 
 [node name="Hand" type="Node2D" parent="." unique_id=324470352]

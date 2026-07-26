@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ColorMatch" format=3 uid="uid://chbby6dty1r2t"]
+
+[ext_resource type="Script" uid="uid://dmpga7tt0btj8" path="res://Scripts/Item Rules/color_match_rule.gd" id="1_g7u6d"]
+
+[resource]
+script = ExtResource("1_g7u6d")
+last_color = 2
+new_color = 2
+metadata/_custom_type_script = "uid://dmpga7tt0btj8"

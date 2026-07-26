@@ -6,10 +6,14 @@ signal die_sequence_start
 signal start_again
 
 var last_round_score: int = 0
-var total_points = 0
+var total_points = 0:
+	set(value):
+		total_points = value
+		$"Current Points Label".text = "$" + str(total_points)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$"Restart Button".visible = false
 	$"Die Button".visible = false
 	$"Current Points Label".visible = false
 	$"Current Points Label".text = str(total_points)
@@ -23,21 +27,32 @@ func _on_die_button_pressed() -> void:
 	#Reshuffle the deck
 	#Award points for cards
 	total_points += last_round_score
-	$"Current Points Label".text = str(total_points)
+	$"Current Points Label".text = "$" + str(total_points)
 	$"Current Points Label".visible = true
 	$"Die Button".visible = false
 	$"Live Again Button".visible = true
+	SoundManager.play(preload("res://Sounds/MenuClose.wav"))
 	
 	die_sequence_start.emit()
 
 func _on_game_over(score: int):
 	last_round_score = score
 	$"Die Button".visible = true
+	SoundManager.play(preload("res://Sounds/MenuError.wav"))
 	
 
+func _on_game_won():
+	$"Restart Button".visible = true
 
 func _on_live_again_button_pressed() -> void:
 	$"Current Points Label".visible = false
 	$"Live Again Button".visible = false
-	
+	SoundManager.play(preload("res://Sounds/MenuOpen.wav"))
 	start_again.emit()
+
+func _on_restart_button_pressed() -> void:
+	get_tree().reload_current_scene()
+
+
+func _on_mute_toggled(toggled_on: bool) -> void:
+	AudioServer.set_bus_mute(0, toggled_on)

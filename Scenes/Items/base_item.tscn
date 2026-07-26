@@ -36,25 +36,6 @@ script = ExtResource("2_tfi04")
 [node name="Content" type="Node2D" parent="." unique_id=114111459]
 position = Vector2(64, 64)
 
-[node name="Name" type="RichTextLabel" parent="Content" unique_id=2018329301]
-offset_left = -57.0
-offset_top = -136.0
-offset_right = 57.0
-offset_bottom = -66.0
-pivot_offset = Vector2(64, 64)
-pivot_offset_ratio = Vector2(0.5, 0.5)
-offset_transform_pivot = Vector2(64, 64)
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/normal_font = ExtResource("3_s1xv6")
-theme_override_font_sizes/normal_font_size = 51
-text = "Item"
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Background" type="Sprite2D" parent="Content" unique_id=569854643]
 self_modulate = Color(0, 0, 0, 1)
 material = SubResource("ShaderMaterial_bnspj")
@@ -71,3 +52,82 @@ texture = ExtResource("6_akaka")
 [node name="Back" type="Sprite2D" parent="Content" unique_id=1326832101]
 visible = false
 texture = ExtResource("1_6xj51")
+
+[node name="Name" type="RichTextLabel" parent="Content" unique_id=2018329301]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -294.5
+offset_top = -139.82
+offset_right = 294.5
+offset_bottom = -63.820007
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("3_s1xv6")
+theme_override_font_sizes/normal_font_size = 51
+text = "Item Name Item Name"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="Content" unique_id=391845781]
+clip_contents = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -325.0
+offset_top = 92.0
+offset_right = 302.0
+offset_bottom = 355.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("3_s1xv6")
+theme_override_font_sizes/normal_font_size = 40
+text = "Describe this item so freaking well."
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Cost" type="RichTextLabel" parent="Content" unique_id=890187004]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -12.000015
+offset_top = -38.0
+offset_right = 150.99998
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -0.52887505
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("3_s1xv6")
+theme_override_font_sizes/normal_font_size = 51
+text = "$999"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://brjk8o1nhkv13"
+path="res://.godot/imported/Wed Aug 07 2024.mp3-b6ef1b9ad1c193351df86096fa5c0ef0.mp3str"
+
+[deps]
+
+source_file="res://Music/Wed Aug 07 2024.mp3"
+dest_files=["res://.godot/imported/Wed Aug 07 2024.mp3-b6ef1b9ad1c193351df86096fa5c0ef0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

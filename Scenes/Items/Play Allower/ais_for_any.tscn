@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cdyxu05lnup6w"]
+
+[ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_g1bg1"]
+[ext_resource type="Script" uid="uid://vpqmptsepojh" path="res://Scripts/Item Rules/allow_play_rule.gd" id="2_p645v"]
+[ext_resource type="Resource" uid="uid://bto0knib6kqty" path="res://Item Rule Resources/AnyOnA.tres" id="3_amx6v"]
+[ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="4_vtsqc"]
+[ext_resource type="FontFile" uid="uid://dwymim4r40o5x" path="res://Fonts/Matemasie-Regular.ttf" id="5_c34un"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u40dm"]
+resource_local_to_scene = true
+shader = ExtResource("4_vtsqc")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(1, 0, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[node name="AisForAny" unique_id=1222626534 instance=ExtResource("1_g1bg1")]
+cost = 11
+item_name = "A is For Any"
+description = "You can play any letter on an A."
+play_allow_rules = Array[ExtResource("2_p645v")]([ExtResource("3_amx6v")])
+
+[node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
+material = SubResource("ShaderMaterial_u40dm")
+
+[node name="Letter" type="RichTextLabel" parent="Content" parent_id_path=PackedInt32Array(114111459) index="4" unique_id=2036966884]
+self_modulate = Color(1, 0, 1, 1)
+offset_left = -67.99999
+offset_top = -53.999992
+offset_right = 71.00001
+offset_bottom = 37.000008
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("5_c34un")
+theme_override_font_sizes/normal_font_size = 45
+text = "A"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

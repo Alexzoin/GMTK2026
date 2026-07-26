@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://mmefpv6pkh3l"]
+
+[ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_ov2v5"]
+[ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="2_jbdfm"]
+[ext_resource type="FontFile" uid="uid://dwymim4r40o5x" path="res://Fonts/Matemasie-Regular.ttf" id="3_jbdfm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f8ccx"]
+resource_local_to_scene = true
+shader = ExtResource("2_jbdfm")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(1, 0, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[node name="XXX" unique_id=1222626534 instance=ExtResource("1_ov2v5")]
+cost = 16
+item_name = "XXX"
+description = "Discard all of the Xs from the deck each life."
+item_type = 2
+move_card_destination = 3
+effected_card_criteria_letter = "X"
+
+[node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
+material = SubResource("ShaderMaterial_f8ccx")
+
+[node name="Letter" type="RichTextLabel" parent="Content" parent_id_path=PackedInt32Array(114111459) index="4" unique_id=2107442402]
+self_modulate = Color(1, 0, 1, 1)
+offset_left = -69.0
+offset_top = -52.0
+offset_right = 70.0
+offset_bottom = 39.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_jbdfm")
+theme_override_font_sizes/normal_font_size = 45
+text = "XXX"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

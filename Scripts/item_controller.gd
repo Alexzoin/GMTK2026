@@ -12,12 +12,43 @@ var hand_midpoint_screen_height: float = 0.9
 var hand_hot_zone_screen_height: float = 0.7
 var card_spacing_percentage: float = 0.1
 
-@export var content: Node2D
-@export var name_text: RichTextLabel
-@export var card_image: Sprite2D
+var item_manager: ItemManager = null
+
+@onready var content: Node2D = $Content
+@onready var name_text: RichTextLabel = $Content/Name
+@onready var card_image: Sprite2D = $Content/Image
+@onready var description_text: RichTextLabel = $Content/Description
+@onready var cost_text: RichTextLabel = $Content/Cost
 
 @export var cost: int = 1
+@export var item_name: String
+@export var description: String
+@export var item_type: item_types
 
+enum item_types { play_allower, consumable, passive }
+#play_allower - adds a condition that allows more cards to be played
+#consumable - does an effect when clicked on eg. "discard all blue cards in hand", "draw another hand_size of cards", "discard the top card of the deck"
+#passive - "Every 3 cards you play, play the top card of the deck", "Wehever you play a blue card, make a random card in your hand blue.", "When you start a new life, remove all A cards from the deck."
+
+@export var play_allow_rules: Array[AllowPlayRule]
+
+enum passive_trigger_types { on_round_start, on_shuffle, on_draw_and_play, on_card_played }
+@export var passive_trigger: passive_trigger_types
+
+enum passive_effect_types { move_card, add_cards, draw_a_card }
+@export var passive_effect_type: passive_effect_types
+
+@export_enum("hand", "deck", "pile", "discard") var move_card_destination: int
+
+@export var effected_card_criteria_letter: String
+@export var effected_card_criteria_number: int = -1
+@export var effected_card_criteria_color: Card.card_colors
+@export var use_color: bool = false
+
+enum conditions { none, top_card_is_pink, all_hand_green, card_played_was_d }
+@export var condition: conditions
+
+var scene_resource = null
 
 var is_hovered: bool = false
 var last_pos: Vector2
@@ -29,6 +60,35 @@ var name_text_hidden_pos = null
 var active_tween: Tween = null
 
 var time = 0.0
+
+var is_in_shop: bool = true
+
+var is_dragging: bool = false
+var is_draggable: bool:
+	get():
+		return !is_in_shop
+		
+var rule_used_count = 0
+
+func check_rules(current_card: Card, new_card: Card) -> bool:
+	for rule in play_allow_rules:
+		if rule.check_rule(current_card, new_card):
+			return true
+	
+	return false
+
+func rule_was_used():
+	SoundManager.play(preload("res://Sounds/MenuSelect.wav"))
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_ELASTIC)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(content, "rotation_degrees", 360.0, 1.5)
+	
+	var reset_rot = func(): content.rotation_degrees = 0.0
+	
+	tween.finished.connect(reset_rot)
+	
+	rule_used_count += 1
 
 func _ready() -> void:
 	self.pressed.connect(_on_pressed)
@@ -48,6 +108,12 @@ func _ready() -> void:
 	name_text_start_pos = name_text.position
 	name_text.position.y = name_text.position.y + 64
 	name_text_hidden_pos = name_text.position
+	
+	name_text.text = item_name
+	cost_text.text = "$" + str(cost)
+	description_text.text = description
+	
+	description_text.visible = false
 	
 	#canvas_shader.set_shader_parameter("time_factor", randf() * 5.0)
 
@@ -69,6 +135,8 @@ func _process(delta: float) -> void:
 	
 	var target_scale = Vector2(base_target_scale, base_target_scale)
 	
+	
+	
 	# Distorts the target scale based on movement velocity
 	if velocity.length() > 0.1:
 		target_scale.x += abs(velocity.x) * (squash_stretch_weight / 1000.0)
@@ -79,6 +147,12 @@ func _process(delta: float) -> void:
 	var target_pos = global_position
 	var limit = viewport_rect.size - size * scale
 	var limit_to_screen: bool = false
+	
+	if is_dragging:
+		target_pos = get_global_mouse_position() - pivot_offset * scale
+		limit_to_screen = true
+		
+		content.rotation = 0
 		
 	if limit_to_screen:
 		target_pos = (target_pos).clamp(Vector2.ZERO, limit)
@@ -88,16 +162,28 @@ func _process(delta: float) -> void:
 func _on_pressed() -> void:
 	# Emitted when the button is pressed and then released. 
 	# This is the standard "click" event.
-	#$Content/Back.visible = !$Content/Back.visible
+	print("Clicked")
+	if item_manager and is_in_shop:
+		if item_manager.try_to_purchase(self):
+			SoundManager.play(preload("res://Sounds/Spend.wav"))
+			is_in_shop = false
+			cost_text.visible = false
+			description_text.visible = false
+		else:
+			SoundManager.play(preload("res://Sounds/Tick.wav"))
 	pass
 
 func _on_button_down() -> void:
+	if is_draggable:
+		is_dragging = true
+		move_to_front()
 	pass
 
 func _on_button_up() -> void:
 	# Emitted the moment the mouse button is released, 
 	# regardless of whether the mouse is still over the button.
-	is_hovered = false
+	is_dragging = false
+	#is_hovered = false
 	pass
 
 func _on_toggled(toggled_on: bool) -> void:
@@ -109,9 +195,10 @@ func _on_toggled(toggled_on: bool) -> void:
 func _on_mouse_entered() -> void:
 	# Emitted when the mouse cursor enters the button's bounding box.
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		#print("Letter: " + letter)
+		SoundManager.play(preload("res://Sounds/Snowman Hit.wav"))
 		is_hovered = true
 		z_index = 1
+		description_text.visible = true
 		
 		if active_tween:
 			active_tween.kill()
@@ -126,9 +213,12 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	# Emitted when the mouse cursor leaves the button's bounding box.
-	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	
+	#if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if true:
 		is_hovered = false
 		z_index = 0
+		description_text.visible = false
 		
 		if active_tween:
 			active_tween.kill()

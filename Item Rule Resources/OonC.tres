@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LetterMatch" format=3 uid="uid://c1n4xfkqs0u6f"]
+
+[ext_resource type="Script" uid="uid://36seyebs0dxs" path="res://Scripts/Item Rules/letter_match_rule.gd" id="1_20tve"]
+
+[resource]
+script = ExtResource("1_20tve")
+last_letter = "C"
+new_letter = "O"
+metadata/_custom_type_script = "uid://36seyebs0dxs"

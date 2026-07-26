@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b3vh135f6t2y2"]
+
+[ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_3kii1"]
+[ext_resource type="Script" uid="uid://vpqmptsepojh" path="res://Scripts/Item Rules/allow_play_rule.gd" id="2_5y82w"]
+[ext_resource type="Resource" uid="uid://cy3km0mm2nrbl" path="res://Item Rule Resources/0on1.tres" id="3_1tdik"]
+[ext_resource type="Resource" uid="uid://2j62dh4aei5b" path="res://Item Rule Resources/1on0.tres" id="4_4dod8"]
+[ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="5_gntsl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gt846"]
+resource_local_to_scene = true
+shader = ExtResource("5_gntsl")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(1, 0, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[node name="Binary" unique_id=1222626534 instance=ExtResource("1_3kii1")]
+item_name = "Binary"
+description = "You can play 1s on 0s and 0s on 1s."
+play_allow_rules = Array[ExtResource("2_5y82w")]([ExtResource("3_1tdik"), ExtResource("4_4dod8")])
+
+[node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
+material = SubResource("ShaderMaterial_gt846")

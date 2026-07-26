@@ -13,7 +13,16 @@ config_version=5
 config/name="GMTK 2026"
 run/main_scene="uid://e33vtaq34lpv"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://Images/icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+config/icon="uid://cs6kpowfgy2g6"
+
+[audio]
+
+buses/default_bus_layout="uid://dfg7mgunc68uh"
+
+[autoload]
+
+SoundManager="*uid://bpjrdw6oic1h7"
 
 [display]
 
@@ -25,9 +34,12 @@ window/stretch/aspect="expand"
 folder_colors={
 "res://Fonts/": "teal",
 "res://Images/": "green",
+"res://Item Rule Resources/": "red",
+"res://Music/": "gray",
 "res://Scenes/": "orange",
 "res://Scripts/": "purple",
-"res://Shaders/": "pink"
+"res://Shaders/": "pink",
+"res://Sounds/": "yellow"
 }
 
 [gui]

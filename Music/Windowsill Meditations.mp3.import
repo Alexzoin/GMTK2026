@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dkuvkmvk6hroh"
+path="res://.godot/imported/Windowsill Meditations.mp3-534381e4646ac6935fd2fffdcee834c7.mp3str"
+
+[deps]
+
+source_file="res://Music/Windowsill Meditations.mp3"
+dest_files=["res://.godot/imported/Windowsill Meditations.mp3-534381e4646ac6935fd2fffdcee834c7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

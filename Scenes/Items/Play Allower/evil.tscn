@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://depky20t7um3v"]
+
+[ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_54slc"]
+[ext_resource type="Script" uid="uid://vpqmptsepojh" path="res://Scripts/Item Rules/allow_play_rule.gd" id="2_cx7iu"]
+[ext_resource type="Resource" uid="uid://cjdjn52fjxt3s" path="res://Item Rule Resources/6on6.tres" id="3_ajv1b"]
+[ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="4_8e04p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kxa75"]
+resource_local_to_scene = true
+shader = ExtResource("4_8e04p")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(1, 0.64705884, 0, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[node name="Evil" unique_id=1222626534 instance=ExtResource("1_54slc")]
+cost = 6
+item_name = "Evil"
+description = "You can play 6s on 6s."
+play_allow_rules = Array[ExtResource("2_cx7iu")]([ExtResource("3_ajv1b")])
+
+[node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
+material = SubResource("ShaderMaterial_kxa75")
+
+[node name="Frame" parent="Content" parent_id_path=PackedInt32Array(114111459) index="1" unique_id=821193798]
+self_modulate = Color(1, 0.64705884, 0, 1)

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NumberToLetter" format=3 uid="uid://dupeillauo2rq"]
+
+[ext_resource type="Script" uid="uid://is3k28ppnd3l" path="res://Scripts/Item Rules/number_to_letter_rule.gd" id="1_k13fm"]
+
+[resource]
+script = ExtResource("1_k13fm")
+new_number = 2
+last_letter = "T"
+metadata/_custom_type_script = "uid://is3k28ppnd3l"

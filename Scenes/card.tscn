@@ -42,9 +42,9 @@ card_image = NodePath("Content/Image")
 position = Vector2(64, 64)
 
 [node name="Score" type="RichTextLabel" parent="Content" unique_id=2018329301]
-offset_left = -57.0
-offset_top = -136.0
-offset_right = 57.0
+offset_left = -64.0
+offset_top = -202.0
+offset_right = 63.999954
 offset_bottom = -66.0
 pivot_offset = Vector2(64, 64)
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -56,9 +56,9 @@ theme_override_fonts/normal_font = ExtResource("6_bnspj")
 theme_override_font_sizes/normal_font_size = 51
 text = "999"
 scroll_active = false
-autowrap_mode = 0
+autowrap_mode = 2
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 2
 
 [node name="Background" type="Sprite2D" parent="Content" unique_id=569854643]
 self_modulate = Color(0, 0, 0, 1)

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c08os3nvplywq"
+path="res://.godot/imported/April TEST.mp3-05de11514dbbec171a6af180a4f11832.mp3str"
+
+[deps]
+
+source_file="res://Music/April TEST.mp3"
+dest_files=["res://.godot/imported/April TEST.mp3-05de11514dbbec171a6af180a4f11832.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

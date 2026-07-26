@@ -4,11 +4,61 @@
 [ext_resource type="PackedScene" uid="uid://cb3w4ic4p4nk8" path="res://Scenes/card_ui.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://dlobd5wk8sk3l" path="res://Scenes/tutorial_ui.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://mbs10u4gyosi" path="res://Scenes/ui_canvas.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://biyucmwchgnpk" path="res://Scenes/item_holder.tscn" id="5_wowpa"]
+[ext_resource type="PackedScene" uid="uid://csam6xorp63d1" path="res://Scenes/Items/Play Allower/BlueBlooper.tscn" id="6_i6g32"]
+[ext_resource type="PackedScene" uid="uid://bx8ajsx8ky1br" path="res://Scenes/Items/Play Allower/0_o.tscn" id="6_mg4q0"]
+[ext_resource type="PackedScene" uid="uid://ddmiolicqhtcg" path="res://Scenes/Items/Play Allower/RuleOfCool.tscn" id="7_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://cg0cva7vtt0hf" path="res://Scenes/Items/Play Allower/Alphabetical.tscn" id="8_v158k"]
+[ext_resource type="PackedScene" uid="uid://gvaja616gdgo" path="res://Scenes/Items/Play Allower/YesQueen.tscn" id="9_h4fw4"]
+[ext_resource type="PackedScene" uid="uid://dxdx6702wejon" path="res://Scenes/Items/Play Allower/ato_z.tscn" id="10_ldgsr"]
+[ext_resource type="PackedScene" uid="uid://cdyxu05lnup6w" path="res://Scenes/Items/Play Allower/ais_for_any.tscn" id="11_rku1e"]
+[ext_resource type="PackedScene" uid="uid://bfbh2i4wct1n0" path="res://Scenes/Items/Play Allower/zzz.tscn" id="12_rfjv2"]
+[ext_resource type="PackedScene" uid="uid://copaqfndk4hnl" path="res://Scenes/Items/Play Allower/bomber.tscn" id="12_vm72l"]
+[ext_resource type="PackedScene" uid="uid://depky20t7um3v" path="res://Scenes/Items/Play Allower/evil.tscn" id="13_nb51f"]
+[ext_resource type="PackedScene" uid="uid://b3pu8yhn1i03j" path="res://Scenes/Items/Play Allower/dog.tscn" id="14_22asu"]
+[ext_resource type="PackedScene" uid="uid://lah4twhn368" path="res://Scenes/Items/Play Allower/holy.tscn" id="14_nnt18"]
+[ext_resource type="PackedScene" uid="uid://b3vh135f6t2y2" path="res://Scenes/Items/Play Allower/binary.tscn" id="15_ewbju"]
+[ext_resource type="PackedScene" uid="uid://cqjrlus5qm5bj" path="res://Scenes/Items/Play Allower/explosive.tscn" id="16_fkdbe"]
+[ext_resource type="PackedScene" uid="uid://dsmmbrcbw50im" path="res://Scenes/Items/Play Allower/crazy_8s.tscn" id="16_nnt18"]
+[ext_resource type="PackedScene" uid="uid://ceiollr0sr25x" path="res://Scenes/Items/Play Allower/racing.tscn" id="18_81klo"]
+[ext_resource type="PackedScene" uid="uid://bijwr24umofe2" path="res://Scenes/Items/Play Allower/steak_sauce.tscn" id="20_tgy6u"]
+[ext_resource type="PackedScene" uid="uid://byqq7nukt802b" path="res://Scenes/Items/Play Allower/terminator.tscn" id="21_cwurv"]
+[ext_resource type="PackedScene" uid="uid://cpkbcynuvgm8f" path="res://Scenes/Items/Passive/easy_a.tscn" id="24_vm72l"]
+[ext_resource type="PackedScene" uid="uid://bnnrjco3nknqp" path="res://Scenes/Items/Passive/999_.tscn" id="25_81klo"]
+[ext_resource type="PackedScene" uid="uid://mt4utpi16el4" path="res://Scenes/Items/Passive/orange_juice.tscn" id="26_tgy6u"]
+[ext_resource type="PackedScene" uid="uid://mmefpv6pkh3l" path="res://Scenes/Items/Passive/xxx.tscn" id="27_cwurv"]
+[ext_resource type="PackedScene" uid="uid://dp504fvmyh7rt" path="res://Scenes/Items/Passive/questionable.tscn" id="28_tgy6u"]
+[ext_resource type="PackedScene" uid="uid://dj3pxt42an6t1" path="res://Scenes/Items/Passive/aaahh!.tscn" id="29_cwurv"]
+[ext_resource type="PackedScene" uid="uid://csk2ueopq4rt8" path="res://Scenes/Items/Passive/#000000.tscn" id="30_8m3t6"]
+[ext_resource type="PackedScene" uid="uid://bx47pqnlr30r5" path="res://Scenes/Items/Passive/giant.tscn" id="31_ese38"]
+[ext_resource type="PackedScene" uid="uid://bbpkp3g41n0x" path="res://Scenes/Items/Passive/pretty_in_pink.tscn" id="32_oeip8"]
+[ext_resource type="PackedScene" uid="uid://dlvak67iqk4mq" path="res://Scenes/Items/Passive/envy.tscn" id="33_xe308"]
+[ext_resource type="PackedScene" uid="uid://bultkgdu8rk2q" path="res://Scenes/Items/Passive/d_is_for_draw.tscn" id="34_xe308"]
+[ext_resource type="PackedScene" uid="uid://bxd7kf5dytiuh" path="res://Scenes/Items/Passive/Oh!.tscn" id="35_d3cha"]
+[ext_resource type="AudioStream" uid="uid://c08os3nvplywq" path="res://Music/April TEST.mp3" id="36_bu0y5"]
+[ext_resource type="AudioStream" uid="uid://datt6kcptgs5d" path="res://Music/Bad Drums.mp3" id="37_6a4tp"]
+[ext_resource type="AudioStream" uid="uid://70x1nttkqgs3" path="res://Music/minilogue xd jam.mp3" id="38_631el"]
+[ext_resource type="AudioStream" uid="uid://fmbha1atv01u" path="res://Music/Spacey Melody.mp3" id="39_bu0y5"]
+[ext_resource type="AudioStream" uid="uid://brjk8o1nhkv13" path="res://Music/Wed Aug 07 2024.mp3" id="40_v2cs8"]
+[ext_resource type="AudioStream" uid="uid://dxksl2dbysohx" path="res://Music/Weird Waltz.mp3" id="41_32sfa"]
+[ext_resource type="AudioStream" uid="uid://dkuvkmvk6hroh" path="res://Music/Windowsill Meditations.mp3" id="42_titue"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_frw6b"]
+shuffle = true
+stream_count = 7
+stream_0 = ExtResource("36_bu0y5")
+stream_1 = ExtResource("37_6a4tp")
+stream_2 = ExtResource("38_631el")
+stream_3 = ExtResource("39_bu0y5")
+stream_4 = ExtResource("40_v2cs8")
+stream_5 = ExtResource("41_32sfa")
+stream_6 = ExtResource("42_titue")
 
 [node name="Node2D" type="Node2D" unique_id=1792374812]
 
 [node name="WaveCanvas" parent="." unique_id=894527723 instance=ExtResource("1_ebmjs")]
 layer = -100
+visible = false
 stripes = 2.16
 stripe_thickness = 0.01
 bendyness = 0.1
@@ -20,16 +70,20 @@ smooth_edge = true
 
 [node name="WaveCanvas2" parent="." unique_id=403484869 instance=ExtResource("1_ebmjs")]
 layer = -100
-stripes = 2.16
-stripe_thickness = 0.01
-spin = 0.16
-wave_frequency = -9.05
+visible = false
+stripes = 8.735
+stripe_thickness = 0.059
+bendyness = 0.045
+wave_rotation = 0.46
+wave_frequency = -34.495
+shrink = 44.425
 stripe_color = Color(0, 1, 0, 1)
 background_color = Color(0, 0, 0, 0)
 smooth_edge = true
 
 [node name="WaveCanvas3" parent="." unique_id=2087523465 instance=ExtResource("1_ebmjs")]
 layer = -100
+visible = false
 stripes = 2.16
 stripe_thickness = 0.01
 spin = -0.035
@@ -40,6 +94,7 @@ smooth_edge = true
 
 [node name="WaveCanvas4" parent="." unique_id=870430326 instance=ExtResource("1_ebmjs")]
 layer = -100
+visible = false
 stripes = 2.16
 stripe_thickness = 0.01
 bendyness = 0.1
@@ -53,6 +108,7 @@ smooth_edge = true
 
 [node name="WaveCanvas5" parent="." unique_id=1779120425 instance=ExtResource("1_ebmjs")]
 layer = -100
+visible = false
 stripes = 2.74
 stripe_thickness = 0.01
 bendyness = 0.17
@@ -67,7 +123,6 @@ smooth_edge = true
 [node name="WaveCanvas6" parent="." unique_id=363166282 instance=ExtResource("1_ebmjs")]
 layer = -100
 stripes = 2.44
-stripe_thickness = 0.01
 bendyness = 0.045
 wave_rotation = 0.46
 wave_frequency = -24.88
@@ -76,9 +131,11 @@ stripe_color = Color(0.627451, 0.1254902, 0.9411765, 1)
 background_color = Color(0, 0, 0, 0)
 smooth_edge = true
 
-[node name="Card UI" parent="." unique_id=542603436 node_paths=PackedStringArray("tutorial", "ui") instance=ExtResource("2_qxrlw")]
+[node name="Card UI" parent="." unique_id=542603436 node_paths=PackedStringArray("tutorial", "ui", "item_manager", "make_visible_when_win") instance=ExtResource("2_qxrlw")]
 tutorial = NodePath("../tutorial_ui")
 ui = NodePath("../ui_canvas")
+item_manager = NodePath("../Item Holder")
+make_visible_when_win = [NodePath("../WaveCanvas"), NodePath("../WaveCanvas2"), NodePath("../WaveCanvas3"), NodePath("../WaveCanvas4"), NodePath("../WaveCanvas5")]
 
 [node name="tutorial_ui" parent="." unique_id=332380429 node_paths=PackedStringArray("show_text_at_card_number") instance=ExtResource("3_wrm1d")]
 show_text_at_card_number = {
@@ -86,7 +143,20 @@ show_text_at_card_number = {
 1: NodePath("LowerCards"),
 2: NodePath("LowerCards2"),
 3: NodePath("PlayAllCards"),
-5: NodePath("DrawBackUp")
+5: NodePath("DrawBackUp"),
+7: NodePath("HoverOverDeck"),
+9: NodePath("CardGlow")
 }
 
 [node name="ui_canvas" parent="." unique_id=406754162 instance=ExtResource("4_3dryh")]
+
+[node name="Item Holder" parent="." unique_id=352947913 node_paths=PackedStringArray("ui_manager", "card_manager") instance=ExtResource("5_wowpa")]
+ui_manager = NodePath("../ui_canvas")
+card_manager = NodePath("../Card UI")
+all_items = Array[PackedScene]([ExtResource("6_mg4q0"), ExtResource("11_rku1e"), ExtResource("8_v158k"), ExtResource("10_ldgsr"), ExtResource("15_ewbju"), ExtResource("6_i6g32"), ExtResource("12_vm72l"), ExtResource("16_nnt18"), ExtResource("14_22asu"), ExtResource("13_nb51f"), ExtResource("16_fkdbe"), ExtResource("14_nnt18"), ExtResource("18_81klo"), ExtResource("7_1l0tm"), ExtResource("20_tgy6u"), ExtResource("21_cwurv"), ExtResource("9_h4fw4"), ExtResource("12_rfjv2"), ExtResource("24_vm72l"), ExtResource("25_81klo"), ExtResource("26_tgy6u"), ExtResource("27_cwurv"), ExtResource("28_tgy6u"), ExtResource("29_cwurv"), ExtResource("30_8m3t6"), ExtResource("31_ese38"), ExtResource("32_oeip8"), ExtResource("33_xe308"), ExtResource("34_xe308"), ExtResource("35_d3cha")])
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1372150681]
+stream = SubResource("AudioStreamPlaylist_frw6b")
+volume_db = -2.447
+autoplay = true
+bus = &"Music"

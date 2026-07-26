@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NumberMatch" format=3 uid="uid://cjdjn52fjxt3s"]
+
+[ext_resource type="Script" uid="uid://bsqcgd45d6y7j" path="res://Scripts/Item Rules/number_match_rule.gd" id="1_wg7nk"]
+
+[resource]
+script = ExtResource("1_wg7nk")
+last_number = 6
+new_number = 6
+metadata/_custom_type_script = "uid://bsqcgd45d6y7j"

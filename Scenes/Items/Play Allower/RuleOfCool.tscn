@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://ddmiolicqhtcg"]
+
+[ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_8m23y"]
+[ext_resource type="Script" uid="uid://vpqmptsepojh" path="res://Scripts/Item Rules/allow_play_rule.gd" id="2_nxsdu"]
+[ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="2_wb5tk"]
+[ext_resource type="Resource" uid="uid://ljkpac8ldhcq" path="res://Item Rule Resources/LonO.tres" id="3_hibn3"]
+[ext_resource type="Resource" uid="uid://c1n4xfkqs0u6f" path="res://Item Rule Resources/OonC.tres" id="4_aed26"]
+[ext_resource type="Resource" uid="uid://cgoeprs8rvfaq" path="res://Item Rule Resources/OonO.tres" id="5_s0krq"]
+[ext_resource type="FontFile" uid="uid://dwymim4r40o5x" path="res://Fonts/Matemasie-Regular.ttf" id="7_hibn3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4f33"]
+resource_local_to_scene = true
+shader = ExtResource("2_wb5tk")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(0, 1, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[node name="RuleOfCool" unique_id=1222626534 instance=ExtResource("1_8m23y")]
+cost = 6
+item_name = "Rule of Cool"
+description = "You can play cards if they spell 'cool'. (Cs on Os, Os on Os, and Ls on Os.)"
+play_allow_rules = Array[ExtResource("2_nxsdu")]([ExtResource("3_hibn3"), ExtResource("4_aed26"), ExtResource("5_s0krq")])
+
+[node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
+material = SubResource("ShaderMaterial_o4f33")
+
+[node name="Frame" parent="Content" parent_id_path=PackedInt32Array(114111459) index="1" unique_id=821193798]
+self_modulate = Color(0, 1, 1, 1)
+
+[node name="Letter" type="RichTextLabel" parent="Content" parent_id_path=PackedInt32Array(114111459) index="4" unique_id=302780945]
+self_modulate = Color(0, 1, 1, 1)
+offset_left = -67.99999
+offset_top = -53.999992
+offset_right = 71.00001
+offset_bottom = 37.000008
+rotation = 0.6953746
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("7_hibn3")
+theme_override_font_sizes/normal_font_size = 45
+text = "COOL"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

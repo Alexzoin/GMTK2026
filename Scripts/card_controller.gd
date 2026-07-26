@@ -2,7 +2,7 @@ extends TextureButton
 
 class_name Card
 
-signal card_played(card_controller)
+signal card_played(card_controller, old_card_controller)
 
 @export var dragging_scale: float = 0.7
 @export var hand_scale: float = 0.4
@@ -20,6 +20,11 @@ signal card_played(card_controller)
 @export var card_image: Sprite2D
 
 #@onready var canvas_shader: ShaderMaterial = content.material as ShaderMaterial
+@onready var bg_shader: ShaderMaterial = $Content/Background.material as ShaderMaterial
+
+var item_manager: ItemManager = null
+
+var is_basic_card: bool
 
 var card_value: int:
 	get():
@@ -32,8 +37,17 @@ var is_playable: int:
 		if pile_parent.get_child_count() == 0:
 			return true
 		else:
-			#return true
-			return card_value < pile_parent.get_child(-1).card_value
+			var last_card: Card = pile_parent.get_child(-1)
+			if card_value < last_card.card_value:
+				return true
+			elif letter == "?":
+				return true
+			elif last_card.letter == "?":
+				return true
+			else:
+				if item_manager.evaluate_card(self):
+					return true
+			return false
 
 var is_dragging: bool = false
 var in_hand: bool:
@@ -66,6 +80,10 @@ var active_tween: Tween = null
 var letter: String = ""
 var number: int = -1
 var color: Color
+var card_color: card_colors
+
+const colors: Array[Color] = [Color.MAGENTA, Color.YELLOW, Color.AQUA, Color.ORANGE, Color.PURPLE, Color.GREEN]
+enum card_colors { Magenta, Yellow, Aqua, Orange, Purple, Green }
 
 var time = 0.0
 
@@ -84,19 +102,26 @@ func _ready() -> void:
 	self.minimum_size_changed.connect(_on_minimum_size_changed)
 	
 	viewport_rect = get_viewport_rect()
-	score_text.text = str(card_value)
+	if letter == "?":
+		score_text.text = "???"
+	else:
+		score_text.text = str(card_value)
 	score_text_start_pos = score_text.position
 	score_text.position.y = score_text.position.y + 64
 	score_text_hidden_pos = score_text.position
 	
 	#canvas_shader.set_shader_parameter("time_factor", randf() * 5.0)
 
-func init_card(letter: String = "", num: int = -1, color: Color = Color.WHITE) -> void:
-	if letter == "":
+func init_card(new_letter: String, num: int, new_color: Color, new_item_manager: ItemManager) -> void:
+	if new_item_manager == null:
+		assert("Item manager reference required.")
+	else:
+		item_manager = new_item_manager
+	if new_letter == "":
 		push_error("NO LETTER")
 	else:
-		self.letter = letter
-		letter_text.text = letter
+		self.letter = new_letter
+		letter_text.text = new_letter
 		
 	if num < 0:
 		self.number = randi_range(0, 9)
@@ -114,18 +139,19 @@ func init_card(letter: String = "", num: int = -1, color: Color = Color.WHITE) -
 	number_text.position.y += randf_range(-5, 5)
 	number_text.position.x += randf_range(-5, 5)
 	
-	set_color(color)
+	set_color(new_color)
 	
-func set_color(color: Color) -> void:
-	self.color = color
-	letter_text.self_modulate = color
-	number_text.self_modulate = color
+func set_color(new_color: Color) -> void:
+	self.card_color = colors.find(new_color) as card_colors
+	self.color = new_color
+	letter_text.self_modulate = self.color
+	number_text.self_modulate = self.color
 	for node in content.get_children():
 		if node is Sprite2D:
-			node.self_modulate = color
+			node.self_modulate = self.color
 			
 			if node.material:
-				(node.material as ShaderMaterial).set_shader_parameter("stripe_color", color)
+				(node.material as ShaderMaterial).set_shader_parameter("stripe_color", self.color)
 
 func set_parent_references(hand_parent, deck_parent, pile_parent, discard_parent) -> void:
 	self.hand_parent = hand_parent
@@ -162,6 +188,8 @@ func _process(delta: float) -> void:
 		base_target_scale = hover_scale
 	elif in_deck:
 		base_move_speed = move_speed / 10.0
+	elif in_discard:
+		base_target_scale = 0.3
 	
 	var target_scale = Vector2(base_target_scale, base_target_scale)
 	
@@ -191,6 +219,13 @@ func _process(delta: float) -> void:
 		var center_point = viewport_rect.size.x / 2.0
 		var total_hand_space = space_per_card * get_parent().get_child_count()
 		total_hand_space -= space_per_card * card_spacing_percentage
+		
+		#Compress cards in hand if hand is too large for the screen.
+		var margin = 128
+		if total_hand_space > viewport_rect.size.x - margin:
+			total_hand_space = viewport_rect.size.x - margin
+			space_per_card = (viewport_rect.size.x - margin) / get_parent().get_child_count()
+		
 		var starting_x = center_point - (total_hand_space / 2.0) + (space_per_card / 2.0)
 		var x = starting_x + space_per_card * get_index()
 		
@@ -218,7 +253,8 @@ func _process(delta: float) -> void:
 		else:
 			score_text.position = score_text.position.lerp(score_text_hidden_pos, base_move_speed * delta)
 	elif in_discard:
-		pass
+		target_pos = discard_parent.global_position + Vector2.DOWN * get_index() * 10.0
+		target_pos = target_pos - pivot_offset * scale
 			
 	if not in_hand:
 		is_hovered = false
@@ -230,12 +266,18 @@ func _process(delta: float) -> void:
 
 func play_card():
 	if not is_playable:
+		SoundManager.play(preload("res://Sounds/Tick.wav"))
 		print("Card cannot be played.")
 		return
+	SoundManager.play(preload("res://Sounds/ButtonClick.wav"))
+	var old_card: Card = null
+	if pile_parent.get_child_count() > 0:
+		old_card = pile_parent.get_child(-1) as Card
+		
 	reparent(pile_parent)
 	z_index = 0
 	scale = scale / 2.0
-	card_played.emit(self)
+	card_played.emit(self, old_card)
 	
 	if active_tween:
 		active_tween.kill()
@@ -246,6 +288,13 @@ func play_card():
 
 func draw():
 	reparent(hand_parent)
+	set_display_as_playable(is_playable)
+
+func set_display_as_playable(val: bool):
+	if val:
+		bg_shader.set_shader_parameter("stripe_thickness", 0.08)
+	else:
+		bg_shader.set_shader_parameter("stripe_thickness", 0.0)
 
 func is_in_hot_zone():
 	return global_position.y + pivot_offset.y < viewport_rect.size.y * hand_hot_zone_screen_height
@@ -281,36 +330,57 @@ func _on_toggled(toggled_on: bool) -> void:
 
 func _on_mouse_entered() -> void:
 	# Emitted when the mouse cursor enters the button's bounding box.
-	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not is_dragging and in_hand:
-		#print("Letter: " + letter)
-		is_hovered = true
-		z_index = 1
-		
-		if active_tween:
-			active_tween.kill()
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not is_dragging:
+		if in_hand:
+			SoundManager.play(preload("res://Sounds/Appear.mp3"))
+			if letter == "?":
+				score_text.text = "???"
+			else:
+				score_text.text = str(card_value)
+			#print("Letter: " + letter)
+			is_hovered = true
+			z_index = 1
 			
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_ELASTIC)
-		tween.set_ease(Tween.EASE_IN_OUT)
-		tween.tween_property(score_text, "position", score_text_start_pos, 0.5)
-		
-		active_tween = tween
+			if active_tween:
+				active_tween.kill()
+				
+			var tween = create_tween()
+			tween.set_trans(Tween.TRANS_ELASTIC)
+			tween.set_ease(Tween.EASE_IN_OUT)
+			tween.tween_property(score_text, "position", score_text_start_pos, 0.5)
+			
+			active_tween = tween
+			#play_card()
+		elif in_deck:
+			if get_index() == deck_parent.get_child_count() - 1:
+				score_text.text = str(deck_parent.get_child_count())
+				
+				if active_tween:
+					active_tween.kill()
+				
+				var tween = create_tween()
+				tween.set_trans(Tween.TRANS_ELASTIC)
+				tween.set_ease(Tween.EASE_IN_OUT)
+				tween.tween_property(score_text, "position", score_text_start_pos, 0.5)
+				
+				active_tween = tween
 	pass
 
 func _on_mouse_exited() -> void:
 	# Emitted when the mouse cursor leaves the button's bounding box.
-	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not is_dragging and in_hand:
-		is_hovered = false
-		z_index = 0
-		
-		if active_tween:
-			active_tween.kill()
-		
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_ELASTIC)
-		tween.tween_property(score_text, "position", score_text_hidden_pos, 1.0)
-		
-		active_tween = tween
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not is_dragging:
+		if in_hand or in_deck:
+			is_hovered = false
+			z_index = 0
+			
+			if active_tween:
+				active_tween.kill()
+			
+			var tween = create_tween()
+			tween.set_trans(Tween.TRANS_ELASTIC)
+			tween.tween_property(score_text, "position", score_text_hidden_pos, 1.0)
+			
+			active_tween = tween
 	pass
 
 func _on_focus_entered() -> void:
