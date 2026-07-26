@@ -23,21 +23,21 @@ signal game_won
 const ALPHABET = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	for color in Card.colors:
-		print(color.to_html(false))
-	create_deck()
-	game_over.connect(tutorial._on_no_remaining_playable_cards)
-	game_over.connect(ui._on_game_over)
-	ui.die_sequence_start.connect(tutorial.hide_all)
-	ui.die_sequence_start.connect(_die_sequence_start)
-	ui.start_again.connect(_start_new_round)
-	ui.die_sequence_start.connect(item_manager.go_to_shop)
-	ui.start_again.connect(item_manager.hide_shop)
-	game_won.connect(ui._on_game_won)
-	game_won.connect(tutorial._on_win_game)
-	
-	await draw_cards(hand_size)
+#func _ready() -> void:
+	#for color in Card.colors:
+		#print(color.to_html(false))
+	#create_deck()
+	#game_over.connect(tutorial._on_no_remaining_playable_cards)
+	#game_over.connect(ui._on_game_over)
+	#ui.die_sequence_start.connect(tutorial.hide_all)
+	#ui.die_sequence_start.connect(_die_sequence_start)
+	#ui.start_again.connect(_start_new_round)
+	#ui.die_sequence_start.connect(item_manager.go_to_shop)
+	#ui.start_again.connect(item_manager.hide_shop)
+	#game_won.connect(ui._on_game_won)
+	#game_won.connect(tutorial._on_win_game)
+	#
+	#await draw_cards(hand_size)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,17 +52,17 @@ func get_top_pile_card() -> Card:
 	return pile.get_child(pile.get_child_count() - 1)
 
 func create_deck() -> void:
-	for letter in ALPHABET:
-		for num in range(10):
-			var new_card = card_scene.instantiate() as Card
-			new_card.init_card(letter, num, Card.colors.pick_random(), item_manager)
-			new_card.set_parent_references(hand, deck, pile, discard)
-			new_card.card_played.connect(_on_card_played)
-			new_card.card_played.connect(tutorial._on_card_played)
-			new_card.card_played.connect(item_manager._on_card_played)
-			deck.add_child(new_card)
-			new_card.global_position = deck.global_position
-			new_card.is_basic_card = true
+	#for letter in ALPHABET:
+		#for num in range(10):
+			#var new_card = card_scene.instantiate() as Card
+			#new_card.init_card(letter, num, Card.colors.pick_random(), item_manager)
+			#new_card.set_parent_references(hand, deck, pile, discard)
+			#new_card.card_played.connect(_on_card_played)
+			#new_card.card_played.connect(tutorial._on_card_played)
+			#new_card.card_played.connect(item_manager._on_card_played)
+			#deck.add_child(new_card)
+			#new_card.global_position = deck.global_position
+			#new_card.is_basic_card = true
 	
 			
 	shuffle_deck()

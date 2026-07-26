@@ -91,31 +91,9 @@ func rule_was_used():
 	rule_used_count += 1
 
 func _ready() -> void:
-	self.pressed.connect(_on_pressed)
-	self.button_down.connect(_on_button_down)
-	self.button_up.connect(_on_button_up)
-	self.toggled.connect(_on_toggled)
-	
-	self.mouse_entered.connect(_on_mouse_entered)
-	self.mouse_exited.connect(_on_mouse_exited)
-	self.focus_entered.connect(_on_focus_entered)
-	self.focus_exited.connect(_on_focus_exited)
-	self.gui_input.connect(_on_gui_input)
-	self.resized.connect(_on_resized)
-	self.minimum_size_changed.connect(_on_minimum_size_changed)
-	
-	viewport_rect = get_viewport_rect()
-	name_text_start_pos = name_text.position
-	name_text.position.y = name_text.position.y + 64
-	name_text_hidden_pos = name_text.position
-	
-	name_text.text = item_name
-	cost_text.text = "$" + str(cost)
-	description_text.text = description
-	
-	description_text.visible = false
-	
-	#canvas_shader.set_shader_parameter("time_factor", randf() * 5.0)
+	var color = Card.colors.pick_random()
+	($Content/Background.material as ShaderMaterial).set_shader_parameter("stripe_color", color)
+	$Content/Frame.self_modulate = color
 
 
 func _on_gui_input(event: InputEvent) -> void:
@@ -123,41 +101,41 @@ func _on_gui_input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			pass
 
-func _process(delta: float) -> void:
-	time += delta
-	var velocity = (global_position - last_pos) / delta
-	last_pos = global_position
-	
-	var base_move_speed = move_speed
-	var base_target_scale: float = default_scale
-	if is_hovered:
-		base_target_scale = hover_scale
-	
-	var target_scale = Vector2(base_target_scale, base_target_scale)
-	
-	
-	
-	# Distorts the target scale based on movement velocity
-	if velocity.length() > 0.1:
-		target_scale.x += abs(velocity.x) * (squash_stretch_weight / 1000.0)
-		target_scale.y += abs(velocity.y) * (squash_stretch_weight / 1000.0)
-		
-	scale = scale.lerp(target_scale, 1.0 - exp(-10 * delta)).clamp(Vector2.ZERO, Vector2.ONE * 10)
-	
-	var target_pos = global_position
-	var limit = viewport_rect.size - size * scale
-	var limit_to_screen: bool = false
-	
-	if is_dragging:
-		target_pos = get_global_mouse_position() - pivot_offset * scale
-		limit_to_screen = true
-		
-		content.rotation = 0
-		
-	if limit_to_screen:
-		target_pos = (target_pos).clamp(Vector2.ZERO, limit)
-		
-	global_position = global_position.lerp(target_pos, base_move_speed * delta)
+#func _process(delta: float) -> void:
+	#time += delta
+	#var velocity = (global_position - last_pos) / delta
+	#last_pos = global_position
+	#
+	#var base_move_speed = move_speed
+	#var base_target_scale: float = default_scale
+	#if is_hovered:
+		#base_target_scale = hover_scale
+	#
+	#var target_scale = Vector2(base_target_scale, base_target_scale)
+	#
+	#
+	#
+	## Distorts the target scale based on movement velocity
+	#if velocity.length() > 0.1:
+		#target_scale.x += abs(velocity.x) * (squash_stretch_weight / 1000.0)
+		#target_scale.y += abs(velocity.y) * (squash_stretch_weight / 1000.0)
+		#
+	#scale = scale.lerp(target_scale, 1.0 - exp(-10 * delta)).clamp(Vector2.ZERO, Vector2.ONE * 10)
+	#
+	#var target_pos = global_position
+	#var limit = viewport_rect.size - size * scale
+	#var limit_to_screen: bool = false
+	#
+	#if is_dragging:
+		#target_pos = get_global_mouse_position() - pivot_offset * scale
+		#limit_to_screen = true
+		#
+		#content.rotation = 0
+		#
+	#if limit_to_screen:
+		#target_pos = (target_pos).clamp(Vector2.ZERO, limit)
+		#
+	#global_position = global_position.lerp(target_pos, base_move_speed * delta)
 
 func _on_pressed() -> void:
 	# Emitted when the button is pressed and then released. 

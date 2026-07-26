@@ -1,23 +1,11 @@
 [gd_scene format=3 uid="uid://dlobd5wk8sk3l"]
 
-[ext_resource type="Script" uid="uid://b2saqbe5u3328" path="res://Scripts/tutorial.gd" id="1_ryvqc"]
 [ext_resource type="FontFile" uid="uid://dwymim4r40o5x" path="res://Fonts/Matemasie-Regular.ttf" id="2_tpiwi"]
 
-[node name="tutorial_ui" type="CanvasLayer" unique_id=332380429 node_paths=PackedStringArray("show_text_at_card_number", "kill_text", "win_text")]
-script = ExtResource("1_ryvqc")
-show_text_at_card_number = {
-0: NodePath("PlayCards"),
-1: NodePath("LowerCards"),
-2: NodePath("LowerCards2"),
-3: NodePath("PlayAllCards"),
-5: NodePath("DrawBackUp"),
-7: NodePath("HoverOverDeck"),
-9: NodePath("CardGlow")
-}
-kill_text = NodePath("Kill You")
-win_text = NodePath("Winner")
+[node name="tutorial_ui" type="CanvasLayer" unique_id=332380429]
 
 [node name="PlayCards" type="RichTextLabel" parent="." unique_id=1391292596]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -44,6 +32,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LowerCards" type="RichTextLabel" parent="." unique_id=1762227979]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -69,25 +58,24 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="sdfasga" type="RichTextLabel" parent="." unique_id=218737309]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -311.0
-offset_top = -111.0
-offset_right = 341.94586
-offset_bottom = 37.706482
+offset_left = -573.812
+offset_top = -117.77919
+offset_right = 582.16064
+offset_bottom = 30.927307
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 0.025789134
+rotation = 0.018177016
 offset_transform_pivot = Vector2(64, 64)
 mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("2_tpiwi")
-theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "[wave amp=50.0 freq=10.0]R e t r o g r a d e[/wave]"
 scroll_active = false
@@ -95,6 +83,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LowerCards2" type="RichTextLabel" parent="." unique_id=1135308303]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -120,6 +109,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlayAllCards" type="RichTextLabel" parent="." unique_id=921216897]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -145,6 +135,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HoverOverDeck" type="RichTextLabel" parent="." unique_id=278565443]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -170,6 +161,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DrawBackUp" type="RichTextLabel" parent="." unique_id=808179349]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -195,6 +187,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CardGlow" type="RichTextLabel" parent="." unique_id=764848145]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -220,6 +213,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Kill You" type="RichTextLabel" parent="." unique_id=1348684155]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -245,6 +239,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Winner" type="RichTextLabel" parent="." unique_id=486500025]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

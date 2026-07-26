@@ -42,6 +42,7 @@
 [ext_resource type="AudioStream" uid="uid://brjk8o1nhkv13" path="res://Music/Wed Aug 07 2024.mp3" id="40_v2cs8"]
 [ext_resource type="AudioStream" uid="uid://dxksl2dbysohx" path="res://Music/Weird Waltz.mp3" id="41_32sfa"]
 [ext_resource type="AudioStream" uid="uid://dkuvkmvk6hroh" path="res://Music/Windowsill Meditations.mp3" id="42_titue"]
+[ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="43_6a4tp"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_frw6b"]
 shuffle = true
@@ -70,13 +71,12 @@ smooth_edge = true
 
 [node name="WaveCanvas2" parent="." unique_id=403484869 instance=ExtResource("1_ebmjs")]
 layer = -100
-visible = false
-stripes = 8.735
-stripe_thickness = 0.059
+stripes = 5.71
+stripe_thickness = 0.029
 bendyness = 0.045
-wave_rotation = 0.46
-wave_frequency = -34.495
-shrink = 44.425
+wave_rotation = 8.935
+wave_frequency = -15.085
+shrink = 43.54
 stripe_color = Color(0, 1, 0, 1)
 background_color = Color(0, 0, 0, 0)
 smooth_edge = true
@@ -132,25 +132,19 @@ background_color = Color(0, 0, 0, 0)
 smooth_edge = true
 
 [node name="Card UI" parent="." unique_id=542603436 node_paths=PackedStringArray("tutorial", "ui", "item_manager", "make_visible_when_win") instance=ExtResource("2_qxrlw")]
+visible = false
 tutorial = NodePath("../tutorial_ui")
 ui = NodePath("../ui_canvas")
 item_manager = NodePath("../Item Holder")
 make_visible_when_win = [NodePath("../WaveCanvas"), NodePath("../WaveCanvas2"), NodePath("../WaveCanvas3"), NodePath("../WaveCanvas4"), NodePath("../WaveCanvas5")]
 
-[node name="tutorial_ui" parent="." unique_id=332380429 node_paths=PackedStringArray("show_text_at_card_number") instance=ExtResource("3_wrm1d")]
-show_text_at_card_number = {
-0: NodePath("PlayCards"),
-1: NodePath("LowerCards"),
-2: NodePath("LowerCards2"),
-3: NodePath("PlayAllCards"),
-5: NodePath("DrawBackUp"),
-7: NodePath("HoverOverDeck"),
-9: NodePath("CardGlow")
-}
+[node name="tutorial_ui" parent="." unique_id=332380429 instance=ExtResource("3_wrm1d")]
 
 [node name="ui_canvas" parent="." unique_id=406754162 instance=ExtResource("4_3dryh")]
+visible = false
 
 [node name="Item Holder" parent="." unique_id=352947913 node_paths=PackedStringArray("ui_manager", "card_manager") instance=ExtResource("5_wowpa")]
+visible = false
 ui_manager = NodePath("../ui_canvas")
 card_manager = NodePath("../Card UI")
 all_items = Array[PackedScene]([ExtResource("6_mg4q0"), ExtResource("11_rku1e"), ExtResource("8_v158k"), ExtResource("10_ldgsr"), ExtResource("15_ewbju"), ExtResource("6_i6g32"), ExtResource("12_vm72l"), ExtResource("16_nnt18"), ExtResource("14_22asu"), ExtResource("13_nb51f"), ExtResource("16_fkdbe"), ExtResource("14_nnt18"), ExtResource("18_81klo"), ExtResource("7_1l0tm"), ExtResource("20_tgy6u"), ExtResource("21_cwurv"), ExtResource("9_h4fw4"), ExtResource("12_rfjv2"), ExtResource("24_vm72l"), ExtResource("25_81klo"), ExtResource("26_tgy6u"), ExtResource("27_cwurv"), ExtResource("28_tgy6u"), ExtResource("29_cwurv"), ExtResource("30_8m3t6"), ExtResource("31_ese38"), ExtResource("32_oeip8"), ExtResource("33_xe308"), ExtResource("34_xe308"), ExtResource("35_d3cha")])
@@ -160,3 +154,155 @@ stream = SubResource("AudioStreamPlaylist_frw6b")
 volume_db = -2.447
 autoplay = true
 bus = &"Music"
+
+[node name="Item" parent="." unique_id=1222626534 instance=ExtResource("43_6a4tp")]
+offset_left = 116.0
+offset_top = -8.000008
+offset_right = 244.0
+offset_bottom = 119.99999
+rotation = 0.70301586
+scale = Vector2(2.3, 2.3)
+
+[node name="Item2" parent="." unique_id=1031654702 instance=ExtResource("43_6a4tp")]
+offset_left = 245.99998
+offset_top = -33.999985
+offset_right = 374.0
+offset_bottom = 94.000015
+rotation = 1.2352369
+scale = Vector2(2.3, 2.3)
+
+[node name="Item3" parent="." unique_id=143420852 instance=ExtResource("43_6a4tp")]
+offset_left = 274.00003
+offset_top = 538.00006
+offset_right = 402.00003
+offset_bottom = 666.00006
+rotation = -1.3354578
+scale = Vector2(2.3, 2.3)
+
+[node name="Item4" parent="." unique_id=58294385 instance=ExtResource("43_6a4tp")]
+offset_left = 629.0
+offset_top = -48.0
+offset_right = 757.0
+offset_bottom = 80.0
+rotation = 3.4259737
+scale = Vector2(2.3, 2.3)
+
+[node name="Item5" parent="." unique_id=771994331 instance=ExtResource("43_6a4tp")]
+offset_left = 724.0001
+offset_top = 571.0
+offset_right = 852.0001
+offset_bottom = 699.0
+rotation = 1.5299026
+scale = Vector2(2.3, 2.3)
+
+[node name="Item6" parent="." unique_id=1710719627 instance=ExtResource("43_6a4tp")]
+offset_left = 848.0
+offset_top = 570.99994
+offset_right = 976.0
+offset_bottom = 699.0
+rotation = 3.6973786
+scale = Vector2(2.3, 2.3)
+
+[node name="Item7" parent="." unique_id=616949323 instance=ExtResource("43_6a4tp")]
+offset_left = 435.99994
+offset_top = -78.00004
+offset_right = 563.99994
+offset_bottom = 49.999992
+rotation = -1.0142767
+scale = Vector2(2.3, 2.3)
+
+[node name="Item8" parent="." unique_id=1258872978 instance=ExtResource("43_6a4tp")]
+offset_left = 403.0
+offset_top = 571.0
+offset_right = 531.00006
+offset_bottom = 699.0
+rotation = 2.6902204
+scale = Vector2(2.3, 2.3)
+
+[node name="Item9" parent="." unique_id=1512329476 instance=ExtResource("43_6a4tp")]
+offset_left = 531.00006
+offset_top = 35.0
+offset_right = 659.0001
+offset_bottom = 163.00003
+rotation = 3.9540226
+scale = Vector2(2.3, 2.3)
+
+[node name="Item10" parent="." unique_id=54326118 instance=ExtResource("43_6a4tp")]
+offset_left = 387.0
+offset_top = 14.999992
+offset_right = 515.00006
+offset_bottom = 143.00003
+rotation = -0.42155474
+scale = Vector2(2.3, 2.3)
+
+[node name="Item11" parent="." unique_id=1130378794 instance=ExtResource("43_6a4tp")]
+offset_left = 717.0
+offset_top = 26.000015
+offset_right = 845.00006
+offset_bottom = 154.00003
+rotation = 2.0776923
+scale = Vector2(2.3, 2.3)
+
+[node name="Item12" parent="." unique_id=1582377485 instance=ExtResource("43_6a4tp")]
+offset_left = 162.99995
+offset_top = 450.00003
+offset_right = 291.0
+offset_bottom = 578.0
+rotation = 3.4907835
+scale = Vector2(2.3, 2.3)
+
+[node name="Item13" parent="." unique_id=774311841 instance=ExtResource("43_6a4tp")]
+offset_left = 635.0
+offset_top = 502.0
+offset_right = 763.00006
+offset_bottom = 630.0
+rotation = 0.23321229
+scale = Vector2(2.3, 2.3)
+
+[node name="Item14" parent="." unique_id=769915192 instance=ExtResource("43_6a4tp")]
+offset_left = 156.0
+offset_top = 556.0
+offset_right = 284.00006
+offset_bottom = 684.0
+rotation = 1.4268386
+scale = Vector2(2.3, 2.3)
+
+[node name="Item15" parent="." unique_id=1291311321 instance=ExtResource("43_6a4tp")]
+offset_left = 512.0
+offset_top = 533.0
+offset_right = 640.00006
+offset_bottom = 661.0
+rotation = 2.0626445
+scale = Vector2(2.3, 2.3)
+
+[node name="Item16" parent="." unique_id=1318859352 instance=ExtResource("43_6a4tp")]
+offset_left = 876.0
+offset_top = 453.99997
+offset_right = 1004.0
+offset_bottom = 582.0
+rotation = 1.6223094
+scale = Vector2(2.3, 2.3)
+
+[node name="Item17" parent="." unique_id=1949157262 instance=ExtResource("43_6a4tp")]
+offset_left = 836.99994
+offset_top = 96.000015
+offset_right = 964.99994
+offset_bottom = 224.00002
+rotation = -0.5534473
+scale = Vector2(2.3, 2.3)
+
+[node name="Item18" parent="." unique_id=64105606 instance=ExtResource("43_6a4tp")]
+offset_left = 852.0
+offset_top = 2.0000153
+offset_right = 980.0
+offset_bottom = 130.00002
+rotation = 1.1823001
+scale = Vector2(2.3, 2.3)
+
+[node name="Item19" parent="." unique_id=147727252 instance=ExtResource("43_6a4tp")]
+offset_left = 196.0
+offset_top = 58.0
+offset_right = 324.0
+offset_bottom = 186.0
+rotation = 1.2274232
+scale = Vector2(2.3, 2.3)
