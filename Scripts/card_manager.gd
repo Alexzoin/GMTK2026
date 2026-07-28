@@ -23,9 +23,9 @@ signal game_won
 const ALPHABET = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 # Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#for color in Card.colors:
-		#print(color.to_html(false))
+func _ready() -> void:
+	for color in Card.colors:
+		print(color.to_html(false))
 	#create_deck()
 	#game_over.connect(tutorial._on_no_remaining_playable_cards)
 	#game_over.connect(ui._on_game_over)

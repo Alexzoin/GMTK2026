@@ -43,6 +43,11 @@
 [ext_resource type="AudioStream" uid="uid://dxksl2dbysohx" path="res://Music/Weird Waltz.mp3" id="41_32sfa"]
 [ext_resource type="AudioStream" uid="uid://dkuvkmvk6hroh" path="res://Music/Windowsill Meditations.mp3" id="42_titue"]
 [ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="43_6a4tp"]
+[ext_resource type="FontFile" uid="uid://dwymim4r40o5x" path="res://Fonts/Matemasie-Regular.ttf" id="44_tt7mg"]
+[ext_resource type="Texture2D" uid="uid://dul2gtpe82lb1" path="res://Images/card_mask_128x128_ffffff.png" id="45_htg8p"]
+[ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="47_fnkle"]
+[ext_resource type="Texture2D" uid="uid://dia2bwgbyiu1k" path="res://Images/card_mask_128x128_ffffff (1).png" id="48_wr3wg"]
+[ext_resource type="Texture2D" uid="uid://c62cs0p6r37b0" path="res://Images/icon.svg" id="49_6xvgv"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_frw6b"]
 shuffle = true
@@ -54,6 +59,90 @@ stream_3 = ExtResource("39_bu0y5")
 stream_4 = ExtResource("40_v2cs8")
 stream_5 = ExtResource("41_32sfa")
 stream_6 = ExtResource("42_titue")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8lpvs"]
+resource_local_to_scene = true
+shader = ExtResource("47_fnkle")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(1, 0, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x6jpx"]
+resource_local_to_scene = true
+shader = ExtResource("47_fnkle")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(0, 1, 0, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_titue"]
+resource_local_to_scene = true
+shader = ExtResource("47_fnkle")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(0, 1, 0, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tt7mg"]
+resource_local_to_scene = true
+shader = ExtResource("47_fnkle")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(1, 1, 0, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_htg8p"]
+resource_local_to_scene = true
+shader = ExtResource("47_fnkle")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(0, 1, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jcvim"]
+resource_local_to_scene = true
+shader = ExtResource("47_fnkle")
+shader_parameter/stripes = 20.0
+shader_parameter/stripe_thickness = 0.08
+shader_parameter/bendyness = 0.3
+shader_parameter/rotation = 3.0
+shader_parameter/spin = 0.0
+shader_parameter/wave_frequency = 2.0
+shader_parameter/shrink = 15.0
+shader_parameter/stripe_color = Color(1, 0.64705884, 0, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/smooth_edge = true
 
 [node name="Node2D" type="Node2D" unique_id=1792374812]
 
@@ -71,6 +160,7 @@ smooth_edge = true
 
 [node name="WaveCanvas2" parent="." unique_id=403484869 instance=ExtResource("1_ebmjs")]
 layer = -100
+visible = false
 stripes = 5.71
 stripe_thickness = 0.029
 bendyness = 0.045
@@ -122,6 +212,7 @@ smooth_edge = true
 
 [node name="WaveCanvas6" parent="." unique_id=363166282 instance=ExtResource("1_ebmjs")]
 layer = -100
+visible = false
 stripes = 2.44
 bendyness = 0.045
 wave_rotation = 0.46
@@ -139,6 +230,7 @@ item_manager = NodePath("../Item Holder")
 make_visible_when_win = [NodePath("../WaveCanvas"), NodePath("../WaveCanvas2"), NodePath("../WaveCanvas3"), NodePath("../WaveCanvas4"), NodePath("../WaveCanvas5")]
 
 [node name="tutorial_ui" parent="." unique_id=332380429 instance=ExtResource("3_wrm1d")]
+visible = false
 
 [node name="ui_canvas" parent="." unique_id=406754162 instance=ExtResource("4_3dryh")]
 visible = false
@@ -156,6 +248,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="Item" parent="." unique_id=1222626534 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 116.0
 offset_top = -8.000008
 offset_right = 244.0
@@ -164,6 +257,7 @@ rotation = 0.70301586
 scale = Vector2(2.3, 2.3)
 
 [node name="Item2" parent="." unique_id=1031654702 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 245.99998
 offset_top = -33.999985
 offset_right = 374.0
@@ -172,6 +266,7 @@ rotation = 1.2352369
 scale = Vector2(2.3, 2.3)
 
 [node name="Item3" parent="." unique_id=143420852 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 274.00003
 offset_top = 538.00006
 offset_right = 402.00003
@@ -180,6 +275,7 @@ rotation = -1.3354578
 scale = Vector2(2.3, 2.3)
 
 [node name="Item4" parent="." unique_id=58294385 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 629.0
 offset_top = -48.0
 offset_right = 757.0
@@ -188,6 +284,7 @@ rotation = 3.4259737
 scale = Vector2(2.3, 2.3)
 
 [node name="Item5" parent="." unique_id=771994331 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 724.0001
 offset_top = 571.0
 offset_right = 852.0001
@@ -196,6 +293,7 @@ rotation = 1.5299026
 scale = Vector2(2.3, 2.3)
 
 [node name="Item6" parent="." unique_id=1710719627 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 848.0
 offset_top = 570.99994
 offset_right = 976.0
@@ -204,6 +302,7 @@ rotation = 3.6973786
 scale = Vector2(2.3, 2.3)
 
 [node name="Item7" parent="." unique_id=616949323 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 435.99994
 offset_top = -78.00004
 offset_right = 563.99994
@@ -212,6 +311,7 @@ rotation = -1.0142767
 scale = Vector2(2.3, 2.3)
 
 [node name="Item8" parent="." unique_id=1258872978 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 403.0
 offset_top = 571.0
 offset_right = 531.00006
@@ -220,6 +320,7 @@ rotation = 2.6902204
 scale = Vector2(2.3, 2.3)
 
 [node name="Item9" parent="." unique_id=1512329476 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 531.00006
 offset_top = 35.0
 offset_right = 659.0001
@@ -228,6 +329,7 @@ rotation = 3.9540226
 scale = Vector2(2.3, 2.3)
 
 [node name="Item10" parent="." unique_id=54326118 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 387.0
 offset_top = 14.999992
 offset_right = 515.00006
@@ -236,6 +338,7 @@ rotation = -0.42155474
 scale = Vector2(2.3, 2.3)
 
 [node name="Item11" parent="." unique_id=1130378794 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 717.0
 offset_top = 26.000015
 offset_right = 845.00006
@@ -244,6 +347,7 @@ rotation = 2.0776923
 scale = Vector2(2.3, 2.3)
 
 [node name="Item12" parent="." unique_id=1582377485 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 162.99995
 offset_top = 450.00003
 offset_right = 291.0
@@ -252,6 +356,7 @@ rotation = 3.4907835
 scale = Vector2(2.3, 2.3)
 
 [node name="Item13" parent="." unique_id=774311841 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 635.0
 offset_top = 502.0
 offset_right = 763.00006
@@ -260,6 +365,7 @@ rotation = 0.23321229
 scale = Vector2(2.3, 2.3)
 
 [node name="Item14" parent="." unique_id=769915192 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 156.0
 offset_top = 556.0
 offset_right = 284.00006
@@ -268,6 +374,7 @@ rotation = 1.4268386
 scale = Vector2(2.3, 2.3)
 
 [node name="Item15" parent="." unique_id=1291311321 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 512.0
 offset_top = 533.0
 offset_right = 640.00006
@@ -276,6 +383,7 @@ rotation = 2.0626445
 scale = Vector2(2.3, 2.3)
 
 [node name="Item16" parent="." unique_id=1318859352 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 876.0
 offset_top = 453.99997
 offset_right = 1004.0
@@ -284,6 +392,7 @@ rotation = 1.6223094
 scale = Vector2(2.3, 2.3)
 
 [node name="Item17" parent="." unique_id=1949157262 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 836.99994
 offset_top = 96.000015
 offset_right = 964.99994
@@ -292,6 +401,7 @@ rotation = -0.5534473
 scale = Vector2(2.3, 2.3)
 
 [node name="Item18" parent="." unique_id=64105606 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 852.0
 offset_top = 2.0000153
 offset_right = 980.0
@@ -300,9 +410,626 @@ rotation = 1.1823001
 scale = Vector2(2.3, 2.3)
 
 [node name="Item19" parent="." unique_id=147727252 instance=ExtResource("43_6a4tp")]
+visible = false
 offset_left = 196.0
 offset_top = 58.0
 offset_right = 324.0
 offset_bottom = 186.0
 rotation = 1.2274232
 scale = Vector2(2.3, 2.3)
+
+[node name="Display Cards" type="Node2D" parent="." unique_id=1963512373]
+position = Vector2(-240, -204)
+
+[node name="Greater" type="RichTextLabel" parent="Display Cards" unique_id=2108237992]
+offset_left = 426.0
+offset_top = 173.0
+offset_right = 553.99994
+offset_bottom = 370.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 116
+text = ">"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Text" type="RichTextLabel" parent="Display Cards" unique_id=2023982883]
+offset_left = 251.0
+offset_top = 217.0
+offset_right = 724.0
+offset_bottom = 414.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 32
+text = "Higher number same letter."
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Card" type="TextureButton" parent="Display Cards" unique_id=1593750453]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+offset_left = 310.0
+offset_top = 236.0
+offset_right = 438.0
+offset_bottom = 364.0
+pivot_offset = Vector2(64, 64)
+focus_mode = 0
+texture_normal = ExtResource("45_htg8p")
+
+[node name="Content" type="Node2D" parent="Display Cards/Card" unique_id=114111459]
+position = Vector2(64, 64)
+
+[node name="Score" type="RichTextLabel" parent="Display Cards/Card/Content" unique_id=2018329301]
+visible = false
+offset_left = -64.0
+offset_top = -202.0
+offset_right = 63.999954
+offset_bottom = -66.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "999"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Background" type="Sprite2D" parent="Display Cards/Card/Content" unique_id=569854643]
+self_modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_8lpvs")
+texture = ExtResource("45_htg8p")
+
+[node name="Frame" type="Sprite2D" parent="Display Cards/Card/Content" unique_id=821193798]
+self_modulate = Color(1, 0, 1, 1)
+texture = ExtResource("48_wr3wg")
+
+[node name="Image" type="Sprite2D" parent="Display Cards/Card/Content" unique_id=1545964741]
+visible = false
+texture = ExtResource("49_6xvgv")
+
+[node name="Back" type="Sprite2D" parent="Display Cards/Card/Content" unique_id=1326832101]
+visible = false
+texture = ExtResource("45_htg8p")
+
+[node name="Letter" type="RichTextLabel" parent="Display Cards/Card/Content" unique_id=782596592]
+self_modulate = Color(1, 0, 1, 1)
+offset_left = -56.0
+offset_top = -78.0
+offset_right = 18.0
+offset_bottom = 13.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 65
+text = "Z"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="RichTextLabel" parent="Display Cards/Card/Content" unique_id=985520281]
+self_modulate = Color(1, 0, 1, 1)
+offset_top = -13.0
+offset_right = 59.0
+offset_bottom = 57.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "9"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card2" type="TextureButton" parent="Display Cards" unique_id=326422744]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+offset_left = 538.0
+offset_top = 236.0
+offset_right = 666.0
+offset_bottom = 364.0
+pivot_offset = Vector2(64, 64)
+focus_mode = 0
+texture_normal = ExtResource("45_htg8p")
+
+[node name="Content" type="Node2D" parent="Display Cards/Card2" unique_id=46060795]
+position = Vector2(64, 64)
+
+[node name="Score" type="RichTextLabel" parent="Display Cards/Card2/Content" unique_id=1594770091]
+visible = false
+offset_left = -64.0
+offset_top = -202.0
+offset_right = 63.999954
+offset_bottom = -66.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "999"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Background" type="Sprite2D" parent="Display Cards/Card2/Content" unique_id=1592324952]
+self_modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_x6jpx")
+texture = ExtResource("45_htg8p")
+
+[node name="Frame" type="Sprite2D" parent="Display Cards/Card2/Content" unique_id=677108577]
+self_modulate = Color(0, 1, 0, 1)
+texture = ExtResource("48_wr3wg")
+
+[node name="Image" type="Sprite2D" parent="Display Cards/Card2/Content" unique_id=1794632520]
+visible = false
+texture = ExtResource("49_6xvgv")
+
+[node name="Back" type="Sprite2D" parent="Display Cards/Card2/Content" unique_id=897687683]
+visible = false
+texture = ExtResource("45_htg8p")
+
+[node name="Letter" type="RichTextLabel" parent="Display Cards/Card2/Content" unique_id=1812082140]
+self_modulate = Color(0, 1, 0, 1)
+offset_left = -56.0
+offset_top = -78.0
+offset_right = 18.0
+offset_bottom = 13.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 65
+text = "Z"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="RichTextLabel" parent="Display Cards/Card2/Content" unique_id=1466056724]
+self_modulate = Color(0, 1, 0, 1)
+offset_top = -14.0
+offset_right = 59.0
+offset_bottom = 56.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "3"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Display Cards2" type="Node2D" parent="." unique_id=132933169]
+position = Vector2(355, -207)
+
+[node name="Less" type="RichTextLabel" parent="Display Cards2" unique_id=333894029]
+offset_left = 426.0
+offset_top = 173.0
+offset_right = 553.99994
+offset_bottom = 370.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 116
+text = "<"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Text" type="RichTextLabel" parent="Display Cards2" unique_id=1504306209]
+offset_left = 251.0
+offset_top = 217.0
+offset_right = 724.0
+offset_bottom = 414.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 32
+text = "Lower letter higher number."
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Card" type="TextureButton" parent="Display Cards2" unique_id=1686416560]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+offset_left = 310.0
+offset_top = 236.0
+offset_right = 438.0
+offset_bottom = 364.0
+pivot_offset = Vector2(64, 64)
+focus_mode = 0
+texture_normal = ExtResource("45_htg8p")
+
+[node name="Content" type="Node2D" parent="Display Cards2/Card" unique_id=155645917]
+position = Vector2(64, 64)
+
+[node name="Score" type="RichTextLabel" parent="Display Cards2/Card/Content" unique_id=826466826]
+visible = false
+offset_left = -64.0
+offset_top = -202.0
+offset_right = 63.999954
+offset_bottom = -66.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "999"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Background" type="Sprite2D" parent="Display Cards2/Card/Content" unique_id=670276271]
+self_modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_titue")
+texture = ExtResource("45_htg8p")
+
+[node name="Frame" type="Sprite2D" parent="Display Cards2/Card/Content" unique_id=959813318]
+self_modulate = Color(0, 1, 0, 1)
+texture = ExtResource("48_wr3wg")
+
+[node name="Image" type="Sprite2D" parent="Display Cards2/Card/Content" unique_id=1829989810]
+visible = false
+texture = ExtResource("49_6xvgv")
+
+[node name="Back" type="Sprite2D" parent="Display Cards2/Card/Content" unique_id=45308024]
+visible = false
+texture = ExtResource("45_htg8p")
+
+[node name="Letter" type="RichTextLabel" parent="Display Cards2/Card/Content" unique_id=1869261721]
+self_modulate = Color(0, 1, 0, 1)
+offset_left = -56.0
+offset_top = -78.0
+offset_right = 18.0
+offset_bottom = 13.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 65
+text = "B"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="RichTextLabel" parent="Display Cards2/Card/Content" unique_id=303499109]
+self_modulate = Color(0, 1, 0, 1)
+offset_top = -13.0
+offset_right = 59.0
+offset_bottom = 57.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "7"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card2" type="TextureButton" parent="Display Cards2" unique_id=1509440918]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+offset_left = 538.0
+offset_top = 236.0
+offset_right = 666.0
+offset_bottom = 364.0
+pivot_offset = Vector2(64, 64)
+focus_mode = 0
+texture_normal = ExtResource("45_htg8p")
+
+[node name="Content" type="Node2D" parent="Display Cards2/Card2" unique_id=577793169]
+position = Vector2(64, 64)
+
+[node name="Score" type="RichTextLabel" parent="Display Cards2/Card2/Content" unique_id=1473536392]
+visible = false
+offset_left = -64.0
+offset_top = -202.0
+offset_right = 63.999954
+offset_bottom = -66.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "999"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Background" type="Sprite2D" parent="Display Cards2/Card2/Content" unique_id=708913640]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_tt7mg")
+texture = ExtResource("45_htg8p")
+
+[node name="Frame" type="Sprite2D" parent="Display Cards2/Card2/Content" unique_id=4706477]
+self_modulate = Color(1, 1, 0, 1)
+texture = ExtResource("48_wr3wg")
+
+[node name="Image" type="Sprite2D" parent="Display Cards2/Card2/Content" unique_id=600929128]
+visible = false
+texture = ExtResource("49_6xvgv")
+
+[node name="Back" type="Sprite2D" parent="Display Cards2/Card2/Content" unique_id=1757944950]
+visible = false
+texture = ExtResource("45_htg8p")
+
+[node name="Letter" type="RichTextLabel" parent="Display Cards2/Card2/Content" unique_id=1705593343]
+self_modulate = Color(1, 1, 0, 1)
+offset_left = -56.0
+offset_top = -78.0
+offset_right = 18.0
+offset_bottom = 13.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 65
+text = "E"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="RichTextLabel" parent="Display Cards2/Card2/Content" unique_id=1217818402]
+self_modulate = Color(1, 1, 0, 1)
+offset_top = -14.0
+offset_right = 59.0
+offset_bottom = 56.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "2"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Display Cards3" type="Node2D" parent="." unique_id=1219102340]
+position = Vector2(67, 103)
+
+[node name="Less" type="RichTextLabel" parent="Display Cards3" unique_id=1067759219]
+offset_left = 426.0
+offset_top = 173.0
+offset_right = 553.99994
+offset_bottom = 370.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 116
+text = "<"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Text" type="RichTextLabel" parent="Display Cards3" unique_id=887525742]
+offset_left = 251.0
+offset_top = 217.0
+offset_right = 724.0
+offset_bottom = 414.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 32
+text = "Lower letter same number."
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Card" type="TextureButton" parent="Display Cards3" unique_id=1004630049]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+offset_left = 310.0
+offset_top = 236.0
+offset_right = 438.0
+offset_bottom = 364.0
+pivot_offset = Vector2(64, 64)
+focus_mode = 0
+texture_normal = ExtResource("45_htg8p")
+
+[node name="Content" type="Node2D" parent="Display Cards3/Card" unique_id=1571987857]
+position = Vector2(64, 64)
+
+[node name="Score" type="RichTextLabel" parent="Display Cards3/Card/Content" unique_id=595410772]
+visible = false
+offset_left = -64.0
+offset_top = -202.0
+offset_right = 63.999954
+offset_bottom = -66.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "999"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Background" type="Sprite2D" parent="Display Cards3/Card/Content" unique_id=1759439458]
+self_modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_htg8p")
+texture = ExtResource("45_htg8p")
+
+[node name="Frame" type="Sprite2D" parent="Display Cards3/Card/Content" unique_id=956329408]
+self_modulate = Color(0, 1, 1, 1)
+texture = ExtResource("48_wr3wg")
+
+[node name="Image" type="Sprite2D" parent="Display Cards3/Card/Content" unique_id=1361757734]
+visible = false
+texture = ExtResource("49_6xvgv")
+
+[node name="Back" type="Sprite2D" parent="Display Cards3/Card/Content" unique_id=824285269]
+visible = false
+texture = ExtResource("45_htg8p")
+
+[node name="Letter" type="RichTextLabel" parent="Display Cards3/Card/Content" unique_id=791536832]
+self_modulate = Color(0, 1, 1, 1)
+offset_left = -56.0
+offset_top = -78.0
+offset_right = 18.0
+offset_bottom = 13.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 65
+text = "C"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="RichTextLabel" parent="Display Cards3/Card/Content" unique_id=1059373625]
+self_modulate = Color(0, 1, 1, 1)
+offset_top = -13.0
+offset_right = 59.0
+offset_bottom = 57.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "1"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card2" type="TextureButton" parent="Display Cards3" unique_id=1330262871]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+offset_left = 538.0
+offset_top = 236.0
+offset_right = 666.0
+offset_bottom = 364.0
+pivot_offset = Vector2(64, 64)
+focus_mode = 0
+texture_normal = ExtResource("45_htg8p")
+
+[node name="Content" type="Node2D" parent="Display Cards3/Card2" unique_id=1535491279]
+position = Vector2(64, 64)
+
+[node name="Score" type="RichTextLabel" parent="Display Cards3/Card2/Content" unique_id=1335200216]
+visible = false
+offset_left = -64.0
+offset_top = -202.0
+offset_right = 63.999954
+offset_bottom = -66.0
+pivot_offset = Vector2(64, 64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_pivot = Vector2(64, 64)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "999"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Background" type="Sprite2D" parent="Display Cards3/Card2/Content" unique_id=7915614]
+self_modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_jcvim")
+texture = ExtResource("45_htg8p")
+
+[node name="Frame" type="Sprite2D" parent="Display Cards3/Card2/Content" unique_id=973512681]
+self_modulate = Color(1, 0.64705884, 0, 1)
+texture = ExtResource("48_wr3wg")
+
+[node name="Image" type="Sprite2D" parent="Display Cards3/Card2/Content" unique_id=757054286]
+visible = false
+texture = ExtResource("49_6xvgv")
+
+[node name="Back" type="Sprite2D" parent="Display Cards3/Card2/Content" unique_id=1538865594]
+visible = false
+texture = ExtResource("45_htg8p")
+
+[node name="Letter" type="RichTextLabel" parent="Display Cards3/Card2/Content" unique_id=2028331101]
+self_modulate = Color(1, 0.64705884, 0, 1)
+offset_left = -56.0
+offset_top = -78.0
+offset_right = 18.0
+offset_bottom = 13.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 65
+text = "D"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="RichTextLabel" parent="Display Cards3/Card2/Content" unique_id=1762444870]
+self_modulate = Color(1, 0.64705884, 0, 1)
+offset_top = -14.0
+offset_right = 59.0
+offset_bottom = 56.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("44_tt7mg")
+theme_override_font_sizes/normal_font_size = 51
+text = "1"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

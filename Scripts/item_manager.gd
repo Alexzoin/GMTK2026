@@ -13,6 +13,7 @@ var owned_items: Array[Item] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print(Color.ORANGE)
 	$"Shop Items".visible = false
 	$"Item Hand".visible = true
 
