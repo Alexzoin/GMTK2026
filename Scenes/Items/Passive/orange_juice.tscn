@@ -20,6 +20,7 @@ shader_parameter/smooth_edge = true
 [node name="Orange_Juice" unique_id=1222626534 instance=ExtResource("1_t1w1k")]
 cost = 22
 item_name = "Orange Juice"
+description = "Discard all of the orange cards from the deck each life."
 item_type = 2
 move_card_destination = 3
 effected_card_criteria_color = 3
