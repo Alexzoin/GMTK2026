@@ -19,7 +19,7 @@ shader_parameter/smooth_edge = true
 
 [node name="AAAHH!" unique_id=1222626534 instance=ExtResource("1_8v7ks")]
 cost = 3
-item_name = "AAAHH! "
+item_name = "AAAHH!"
 description = "Add 10 more As to the deck."
 item_type = 2
 passive_trigger = 1

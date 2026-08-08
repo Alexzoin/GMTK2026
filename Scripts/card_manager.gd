@@ -118,7 +118,7 @@ func _on_card_played(card: Card, old_card: Card):
 		print(item.item_name)
 		if item.item_type == Item.item_types.passive and (item.passive_trigger == Item.passive_trigger_types.on_draw_and_play or item.passive_trigger == Item.passive_trigger_types.on_card_played):
 			print("Triggered")
-			if item.condition == Item.conditions.top_card_is_pink and (deck.get_child(-1) as Card).color == Color.MAGENTA:
+			if item.condition == Item.conditions.top_card_is_pink and deck.get_child_count() > 0 and (deck.get_child(-1) as Card).color == Color.MAGENTA:
 				print("top card is pink")
 				if item.passive_effect_type == Item.passive_effect_types.draw_a_card:
 					await draw_cards(1)
@@ -188,6 +188,9 @@ func shuffle_deck():
 		deck.move_child(cards[i], i)
 
 func all_cards_in_hand_color(color: Color):
+	if hand.get_child_count() == 0:
+		return false
+	
 	var all_match = true
 	for card in hand.get_children():
 		card = card as Card

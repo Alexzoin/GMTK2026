@@ -25,7 +25,7 @@ shader_parameter/smooth_edge = true
 [node name="RuleOfCool" unique_id=1222626534 instance=ExtResource("1_8m23y")]
 cost = 6
 item_name = "Rule of Cool"
-description = "You can play cards if they spell 'cool'. (Cs on Os, Os on Os, and Ls on Os.)"
+description = "You can play cards if they spell 'cool'. (Os on Cs, Os on Os, and Ls on Os.)"
 play_allow_rules = Array[ExtResource("2_nxsdu")]([ExtResource("3_hibn3"), ExtResource("4_aed26"), ExtResource("5_s0krq")])
 
 [node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]

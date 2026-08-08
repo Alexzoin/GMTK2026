@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://dxdx6702wejon"]
 
 [ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_5pfng"]
+[ext_resource type="Script" uid="uid://vpqmptsepojh" path="res://Scripts/Item Rules/allow_play_rule.gd" id="2_givun"]
 [ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="2_tf0t7"]
+[ext_resource type="Resource" uid="uid://lugd551pm1uq" path="res://Item Rule Resources/ZonA.tres" id="3_ru7eu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tgfd1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e410t"]
 resource_local_to_scene = true
 shader = ExtResource("2_tf0t7")
 shader_parameter/stripes = 20.0
@@ -21,6 +23,7 @@ shader_parameter/smooth_edge = true
 cost = 7
 item_name = "A to Z"
 description = "You can play Zs on As."
+play_allow_rules = Array[ExtResource("2_givun")]([ExtResource("3_ru7eu")])
 
 [node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
-material = SubResource("ShaderMaterial_tgfd1")
+material = SubResource("ShaderMaterial_e410t")
