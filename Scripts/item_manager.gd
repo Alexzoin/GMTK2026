@@ -33,6 +33,10 @@ func _process(delta: float) -> void:
 		#temp.description_text.visible = false
 	pass
 
+func process_passives(trigger_type: PassiveRule.TriggerType, context: Dictionary) -> void:
+	for item in owned_items:
+		item.process_passive_trigger(trigger_type, context)
+
 func evaluate_card(new_card: Card) -> bool:
 	var last_card = card_manager.get_last_played_card()
 	if last_card:

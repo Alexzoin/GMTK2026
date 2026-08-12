@@ -4,6 +4,7 @@ class_name CardManager
 
 signal game_over(scored_cards: int)
 signal game_won
+signal card_played_signal(card: Card, old_card: Card)
 
 @onready var card_scene = preload("uid://cbkulcdb3k8uy")
 
@@ -12,8 +13,6 @@ signal game_won
 @export var pile: Node
 @export var discard: Node
 
-@export var tutorial: Tutorial
-@export var ui: UI
 @export var item_manager: ItemManager
 
 @export var hand_size: int = 5
@@ -27,15 +26,6 @@ func _ready() -> void:
 	for color in Card.colors:
 		print(color.to_html(false))
 	create_deck()
-	game_over.connect(tutorial._on_no_remaining_playable_cards)
-	game_over.connect(ui._on_game_over)
-	ui.die_sequence_start.connect(tutorial.hide_all)
-	ui.die_sequence_start.connect(_die_sequence_start)
-	ui.start_again.connect(_start_new_round)
-	ui.die_sequence_start.connect(item_manager.go_to_shop)
-	ui.start_again.connect(item_manager.hide_shop)
-	game_won.connect(ui._on_game_won)
-	game_won.connect(tutorial._on_win_game)
 	
 	await draw_cards(hand_size)
 	
@@ -58,8 +48,6 @@ func create_deck() -> void:
 			new_card.init_card(letter, num, Card.colors.pick_random(), item_manager)
 			new_card.set_parent_references(hand, deck, pile, discard)
 			new_card.card_played.connect(_on_card_played)
-			new_card.card_played.connect(tutorial._on_card_played)
-			new_card.card_played.connect(item_manager._on_card_played)
 			deck.add_child(new_card)
 			new_card.global_position = deck.global_position
 			new_card.is_basic_card = true
@@ -97,41 +85,40 @@ func draw_cards(num_cards: int):
 	if deck.get_child_count() == 0:
 		return
 	
-	for item in item_manager.owned_items:
-		if item.item_type == Item.item_types.passive and item.passive_trigger == Item.passive_trigger_types.on_draw_and_play:
-			if item.condition == Item.conditions.top_card_is_pink and (deck.get_child(-1) as Card).color == Color.MAGENTA:
-				print("top card is pink")
-				if item.passive_effect_type == Item.passive_effect_types.draw_a_card:
-					await draw_cards(1)
-					item.rule_was_used()
-			elif item.condition == Item.conditions.all_hand_green and all_cards_in_hand_color(Color.GREEN):
-				if item.passive_effect_type == Item.passive_effect_types.draw_a_card:
-					await draw_cards(1)
-					item.rule_was_used()
+	if item_manager:
+		item_manager.process_passives(PassiveRule.TriggerType.ON_DRAW_AND_PLAY, {
+			"card_manager": self,
+			"deck": deck,
+			"hand": hand,
+			"pile": pile,
+			"discard": discard
+		})
 		
 func _on_card_played(card: Card, old_card: Card):
+	card_played_signal.emit(card, old_card)
 	print(card.letter + " " + str(card.number))
 	if hand.get_child_count() == 0:
 		await draw_cards(hand_size)
 		
-	for item in item_manager.owned_items:
-		print(item.item_name)
-		if item.item_type == Item.item_types.passive and (item.passive_trigger == Item.passive_trigger_types.on_draw_and_play or item.passive_trigger == Item.passive_trigger_types.on_card_played):
-			print("Triggered")
-			if item.condition == Item.conditions.top_card_is_pink and deck.get_child_count() > 0 and (deck.get_child(-1) as Card).color == Color.MAGENTA:
-				print("top card is pink")
-				if item.passive_effect_type == Item.passive_effect_types.draw_a_card:
-					await draw_cards(1)
-					item.rule_was_used()
-			elif item.condition == Item.conditions.all_hand_green and all_cards_in_hand_color(Color.GREEN):
-				if item.passive_effect_type == Item.passive_effect_types.draw_a_card:
-					await draw_cards(1)
-					item.rule_was_used()
-			elif item.condition == Item.conditions.card_played_was_d and card.letter == "D":
-				print("D played")
-				if item.passive_effect_type == Item.passive_effect_types.draw_a_card:
-					await draw_cards(1)
-					item.rule_was_used()
+	if item_manager:
+		item_manager.process_passives(PassiveRule.TriggerType.ON_CARD_PLAYED, {
+			"card_manager": self,
+			"card": card,
+			"old_card": old_card,
+			"deck": deck,
+			"hand": hand,
+			"pile": pile,
+			"discard": discard
+		})
+		item_manager.process_passives(PassiveRule.TriggerType.ON_DRAW_AND_PLAY, {
+			"card_manager": self,
+			"card": card,
+			"old_card": old_card,
+			"deck": deck,
+			"hand": hand,
+			"pile": pile,
+			"discard": discard
+		})
 	
 	var has_playable = false
 	for hand_card in hand.get_children():
@@ -153,33 +140,14 @@ func _on_card_played(card: Card, old_card: Card):
 			n.visible = true
 
 func shuffle_deck():
-	for item in item_manager.owned_items:
-		if item.item_type == Item.item_types.passive and item.passive_trigger == Item.passive_trigger_types.on_shuffle:
-			for num in range(10):
-				var new_card = card_scene.instantiate()
-				var color = Card.colors.pick_random()
-				var letter = item.effected_card_criteria_letter
-			
-				if letter == "" or letter == null:
-					letter = ALPHABET.pick_random()
-					
-				if item.use_color:
-					color = Card.colors[item.effected_card_criteria_color]
-					
-				var num_to_add = num
-				if item.effected_card_criteria_number != -1:
-					num_to_add = item.effected_card_criteria_number
-					
-				new_card.init_card(letter, num_to_add, color, item_manager)
-				new_card.set_parent_references(hand, deck, pile, discard)
-				(new_card as Card).card_played.connect(_on_card_played)
-				(new_card as Card).card_played.connect(tutorial._on_card_played)
-				(new_card as Card).card_played.connect(item_manager._on_card_played)
-				deck.add_child(new_card)
-				new_card.global_position = deck.global_position
-				print(new_card.color)
-				print(new_card.number)
-				new_card.is_basic_card = false
+	if item_manager:
+		item_manager.process_passives(PassiveRule.TriggerType.ON_SHUFFLE, {
+			"card_manager": self,
+			"deck": deck,
+			"hand": hand,
+			"pile": pile,
+			"discard": discard
+		})
 	
 	var cards = deck.get_children()
 	cards.shuffle()
@@ -225,26 +193,13 @@ func _die_sequence_start():
 	#Animate points scoring, send hand offscreen one by one, tween deck off screen left.
 
 func _start_new_round():
-	for item in item_manager.owned_items:
-		if item.item_type == Item.item_types.passive and item.passive_trigger == Item.passive_trigger_types.on_round_start:
-			for card in deck.get_children():
-				card = card as Card
-				if card.letter == item.effected_card_criteria_letter or card.number == item.effected_card_criteria_number or (card.card_color == item.effected_card_criteria_color and item.use_color):
-					if item.passive_effect_type == Item.passive_effect_types.move_card:
-						var destination: Node = null
-						var dest_int: int = item.move_card_destination
-						
-						if dest_int == 0:
-							destination = hand
-						elif dest_int == 1:
-							destination = deck
-						elif dest_int == 2:
-							destination = pile
-						elif  dest_int == 3:
-							destination = discard
-						
-						print("Card moved to " + destination.name)
-						card.reparent(destination)
-						
+	if item_manager:
+		item_manager.process_passives(PassiveRule.TriggerType.ON_ROUND_START, {
+			"card_manager": self,
+			"deck": deck,
+			"hand": hand,
+			"pile": pile,
+			"discard": discard
+		})
 		
 	await draw_cards(hand_size)

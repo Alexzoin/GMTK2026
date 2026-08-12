@@ -45,7 +45,7 @@ var is_playable: int:
 			elif last_card.letter == "?":
 				return true
 			else:
-				if item_manager.evaluate_card(self):
+				if item_manager.evaluate_play(last_card, self):
 					return true
 			return false
 

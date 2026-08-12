@@ -42,6 +42,7 @@
 [ext_resource type="AudioStream" uid="uid://brjk8o1nhkv13" path="res://Music/Wed Aug 07 2024.mp3" id="40_v2cs8"]
 [ext_resource type="AudioStream" uid="uid://dxksl2dbysohx" path="res://Music/Weird Waltz.mp3" id="41_32sfa"]
 [ext_resource type="AudioStream" uid="uid://dkuvkmvk6hroh" path="res://Music/Windowsill Meditations.mp3" id="42_titue"]
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="43_gman"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_frw6b"]
 shuffle = true
@@ -54,7 +55,12 @@ stream_4 = ExtResource("40_v2cs8")
 stream_5 = ExtResource("41_32sfa")
 stream_6 = ExtResource("42_titue")
 
-[node name="Node2D" type="Node2D" unique_id=1792374812]
+[node name="Node2D" type="Node2D" unique_id=1792374812 node_paths=PackedStringArray("card_manager", "item_manager", "ui", "tutorial")]
+script = ExtResource("43_gman")
+card_manager = NodePath("Card UI")
+item_manager = NodePath("Item Holder")
+ui = NodePath("ui_canvas")
+tutorial = NodePath("tutorial_ui")
 
 [node name="WaveCanvas" parent="." unique_id=894527723 instance=ExtResource("1_ebmjs")]
 layer = -100
@@ -131,9 +137,7 @@ stripe_color = Color(0.627451, 0.1254902, 0.9411765, 1)
 background_color = Color(0, 0, 0, 0)
 smooth_edge = true
 
-[node name="Card UI" parent="." unique_id=542603436 node_paths=PackedStringArray("tutorial", "ui", "item_manager", "make_visible_when_win") instance=ExtResource("2_qxrlw")]
-tutorial = NodePath("../tutorial_ui")
-ui = NodePath("../ui_canvas")
+[node name="Card UI" parent="." unique_id=542603436 node_paths=PackedStringArray("item_manager", "make_visible_when_win") instance=ExtResource("2_qxrlw")]
 item_manager = NodePath("../Item Holder")
 make_visible_when_win = [NodePath("../WaveCanvas"), NodePath("../WaveCanvas2"), NodePath("../WaveCanvas3"), NodePath("../WaveCanvas4"), NodePath("../WaveCanvas5")]
 
@@ -150,9 +154,8 @@ show_text_at_card_number = {
 
 [node name="ui_canvas" parent="." unique_id=406754162 instance=ExtResource("4_3dryh")]
 
-[node name="Item Holder" parent="." unique_id=352947913 node_paths=PackedStringArray("ui_manager", "card_manager") instance=ExtResource("5_wowpa")]
+[node name="Item Holder" parent="." unique_id=352947913 node_paths=PackedStringArray("ui_manager") instance=ExtResource("5_wowpa")]
 ui_manager = NodePath("../ui_canvas")
-card_manager = NodePath("../Card UI")
 all_items = Array[PackedScene]([ExtResource("6_mg4q0"), ExtResource("11_rku1e"), ExtResource("8_v158k"), ExtResource("10_ldgsr"), ExtResource("15_ewbju"), ExtResource("6_i6g32"), ExtResource("12_vm72l"), ExtResource("16_nnt18"), ExtResource("14_22asu"), ExtResource("13_nb51f"), ExtResource("16_fkdbe"), ExtResource("14_nnt18"), ExtResource("18_81klo"), ExtResource("7_1l0tm"), ExtResource("20_tgy6u"), ExtResource("21_cwurv"), ExtResource("9_h4fw4"), ExtResource("12_rfjv2"), ExtResource("24_vm72l"), ExtResource("25_81klo"), ExtResource("26_tgy6u"), ExtResource("27_cwurv"), ExtResource("28_tgy6u"), ExtResource("29_cwurv"), ExtResource("30_8m3t6"), ExtResource("31_ese38"), ExtResource("32_oeip8"), ExtResource("33_xe308"), ExtResource("34_xe308"), ExtResource("35_d3cha")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1372150681]
