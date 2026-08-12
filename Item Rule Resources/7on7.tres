@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="NumberMatch" format=3 uid="uid://bwdtkqjfnqly1"]
-
-[ext_resource type="Script" uid="uid://bsqcgd45d6y7j" path="res://Scripts/Item Rules/number_match_rule.gd" id="1_51qli"]
-
-[resource]
-script = ExtResource("1_51qli")
-last_number = 7
-new_number = 7
-metadata/_custom_type_script = "uid://bsqcgd45d6y7j"

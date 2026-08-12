@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://dsmmbrcbw50im"]
 
 [ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_n5neo"]
-[ext_resource type="Script" uid="uid://vpqmptsepojh" path="res://Scripts/Item Rules/allow_play_rule.gd" id="2_mpkvy"]
-[ext_resource type="Resource" uid="uid://chb4xw56qnnfo" path="res://Item Rule Resources/8on8.tres" id="3_0h5vf"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/number_match_rule.gd" id="2_rule"]
 [ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="4_tthkd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nfgdj"]
@@ -19,11 +18,16 @@ shader_parameter/stripe_color = Color(1, 0, 1, 1)
 shader_parameter/background_color = Color(0, 0, 0, 1)
 shader_parameter/smooth_edge = true
 
+[sub_resource type="Resource" id="Resource_crazy_8s"]
+script = ExtResource("2_rule")
+last_number = 8
+new_number = 8
+
 [node name="Crazy8s" unique_id=1222626534 instance=ExtResource("1_n5neo")]
 cost = 8
 item_name = "Crazy 8s"
 description = "You can play 8s on 8s."
-play_allow_rules = Array[ExtResource("2_mpkvy")]([ExtResource("3_0h5vf")])
+play_allow_rules = Array[Resource("res://Scripts/Item Rules/allow_play_rule.gd")]([SubResource("Resource_crazy_8s")])
 
 [node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
 material = SubResource("ShaderMaterial_nfgdj")

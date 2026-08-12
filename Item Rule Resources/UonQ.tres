@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="LetterMatch" format=3 uid="uid://7a4haegyoafo"]
-
-[ext_resource type="Script" uid="uid://36seyebs0dxs" path="res://Scripts/Item Rules/letter_match_rule.gd" id="1_7ojb7"]
-
-[resource]
-script = ExtResource("1_7ojb7")
-last_letter = "Q"
-new_letter = "U"
-metadata/_custom_type_script = "uid://36seyebs0dxs"

@@ -3,6 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_ls2e0"]
 [ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="2_l4e8q"]
 [ext_resource type="FontFile" uid="uid://dwymim4r40o5x" path="res://Fonts/Matemasie-Regular.ttf" id="3_l4e8q"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/Triggers/on_shuffle_trigger.gd" id="4_trigger"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/Effects/add_cards_to_deck_effect.gd" id="5_effect"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/Passives/passive_rule.gd" id="6_rule"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_llpxj"]
 resource_local_to_scene = true
@@ -18,14 +21,25 @@ shader_parameter/stripe_color = Color(1, 0, 1, 1)
 shader_parameter/background_color = Color(0, 0, 0, 1)
 shader_parameter/smooth_edge = true
 
+[sub_resource type="Resource" id="OnShuffleTrigger_quest"]
+script = ExtResource("4_trigger")
+
+[sub_resource type="Resource" id="AddCardsToDeckEffect_quest"]
+script = ExtResource("5_effect")
+count = 10
+criteria_letter = "?"
+
+[sub_resource type="Resource" id="PassiveRule_quest"]
+script = ExtResource("6_rule")
+trigger = SubResource("OnShuffleTrigger_quest")
+effects = Array[Resource("res://Scripts/Item Rules/Effects/passive_effect.gd")]([SubResource("AddCardsToDeckEffect_quest")])
+
 [node name="Questionable" unique_id=1222626534 instance=ExtResource("1_ls2e0")]
 cost = 7
 item_name = "Questionable"
 description = "Add 10 ? cards to the deck. They can be played in any order."
 item_type = 2
-passive_trigger = 1
-passive_effect_type = 1
-effected_card_criteria_letter = "?"
+passive_rules = Array[Resource("res://Scripts/Item Rules/Passives/passive_rule.gd")]([SubResource("PassiveRule_quest")])
 
 [node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
 material = SubResource("ShaderMaterial_llpxj")

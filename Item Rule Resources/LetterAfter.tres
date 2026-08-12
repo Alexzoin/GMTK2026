@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="PreviousLetter" format=3 uid="uid://pn7a88hgg6wf"]
-
-[ext_resource type="Script" uid="uid://b2xvvhd3xq0vh" path="res://Scripts/Item Rules/next_letter_rule.gd" id="1_lghky"]
-
-[resource]
-script = ExtResource("1_lghky")
-metadata/_custom_type_script = "uid://b2xvvhd3xq0vh"

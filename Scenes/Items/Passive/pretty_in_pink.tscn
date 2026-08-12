@@ -2,6 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_eitft"]
 [ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="2_7t4cu"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/Triggers/top_card_color_trigger.gd" id="3_trigger"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/Effects/draw_cards_effect.gd" id="4_effect"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/Passives/passive_rule.gd" id="5_rule"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eitft"]
 resource_local_to_scene = true
@@ -17,14 +20,25 @@ shader_parameter/stripe_color = Color(1, 0, 1, 1)
 shader_parameter/background_color = Color(0, 0, 0, 1)
 shader_parameter/smooth_edge = true
 
+[sub_resource type="Resource" id="TopCardColorTrigger_pink"]
+script = ExtResource("3_trigger")
+target_color = 0
+
+[sub_resource type="Resource" id="DrawCardsEffect_pink"]
+script = ExtResource("4_effect")
+draw_amount = 1
+
+[sub_resource type="Resource" id="PassiveRule_pink"]
+script = ExtResource("5_rule")
+trigger = SubResource("TopCardColorTrigger_pink")
+effects = Array[Resource("res://Scripts/Item Rules/Effects/passive_effect.gd")]([SubResource("DrawCardsEffect_pink")])
+
 [node name="Pretty in Pink" unique_id=1222626534 instance=ExtResource("1_eitft")]
 cost = 13
 item_name = "Pretty in Pink"
 description = "If the top card of the deck is pink, draw it."
 item_type = 2
-passive_trigger = 2
-passive_effect_type = 2
-condition = 1
+passive_rules = Array[Resource("res://Scripts/Item Rules/Passives/passive_rule.gd")]([SubResource("PassiveRule_pink")])
 
 [node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
 material = SubResource("ShaderMaterial_eitft")

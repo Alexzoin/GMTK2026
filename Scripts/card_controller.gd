@@ -22,7 +22,7 @@ signal card_played(card_controller, old_card_controller)
 #@onready var canvas_shader: ShaderMaterial = content.material as ShaderMaterial
 @onready var bg_shader: ShaderMaterial = $Content/Background.material as ShaderMaterial
 
-var item_manager: ItemManager = null
+var item_manager = null
 
 var is_basic_card: bool
 
@@ -80,10 +80,10 @@ var active_tween: Tween = null
 var letter: String = ""
 var number: int = -1
 var color: Color
-var card_color: card_colors
+var card_color: CardEnums.CardColor
 
-const colors: Array[Color] = [Color.MAGENTA, Color.YELLOW, Color.AQUA, Color.ORANGE, Color.PURPLE, Color.GREEN]
-enum card_colors { Magenta, Yellow, Aqua, Orange, Purple, Green }
+const colors: Array[Color] = CardEnums.COLOR_MAP
+enum card_colors { Pink, Yellow, Blue, Orange, Purple, Green }
 
 var time = 0.0
 
@@ -112,7 +112,7 @@ func _ready() -> void:
 	
 	#canvas_shader.set_shader_parameter("time_factor", randf() * 5.0)
 
-func init_card(new_letter: String, num: int, new_color: Color, new_item_manager: ItemManager) -> void:
+func init_card(new_letter: String, num: int, new_color: Color, new_item_manager) -> void:
 	if new_item_manager == null:
 		assert("Item manager reference required.")
 	else:
@@ -142,7 +142,7 @@ func init_card(new_letter: String, num: int, new_color: Color, new_item_manager:
 	set_color(new_color)
 	
 func set_color(new_color: Color) -> void:
-	self.card_color = colors.find(new_color) as card_colors
+	self.card_color = colors.find(new_color) as CardEnums.CardColor
 	self.color = new_color
 	letter_text.self_modulate = self.color
 	number_text.self_modulate = self.color

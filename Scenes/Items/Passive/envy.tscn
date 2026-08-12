@@ -1,11 +1,14 @@
-[gd_scene format=3 uid="uid://dlvak67iqk4mq"]
+[gd_scene format=3 uid="uid://b33xe308envy"]
 
-[ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_s2gvd"]
-[ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="2_rox5j"]
+[ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_envy"]
+[ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="2_envy"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/Triggers/all_hand_color_trigger.gd" id="3_trigger"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/Effects/draw_cards_effect.gd" id="4_effect"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/Passives/passive_rule.gd" id="5_rule"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s2gvd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_envy"]
 resource_local_to_scene = true
-shader = ExtResource("2_rox5j")
+shader = ExtResource("2_envy")
 shader_parameter/stripes = 20.0
 shader_parameter/stripe_thickness = 0.08
 shader_parameter/bendyness = 0.3
@@ -17,17 +20,28 @@ shader_parameter/stripe_color = Color(0, 1, 0, 1)
 shader_parameter/background_color = Color(0, 0, 0, 1)
 shader_parameter/smooth_edge = true
 
-[node name="Envy" unique_id=1222626534 instance=ExtResource("1_s2gvd")]
-cost = 8
+[sub_resource type="Resource" id="AllHandColorTrigger_green"]
+script = ExtResource("3_trigger")
+target_color = 5
+
+[sub_resource type="Resource" id="DrawCardsEffect_green"]
+script = ExtResource("4_effect")
+draw_amount = 1
+
+[sub_resource type="Resource" id="PassiveRule_green"]
+script = ExtResource("5_rule")
+trigger = SubResource("AllHandColorTrigger_green")
+effects = Array[Resource("res://Scripts/Item Rules/Effects/passive_effect.gd")]([SubResource("DrawCardsEffect_green")])
+
+[node name="Envy" unique_id=1222626534 instance=ExtResource("1_envy")]
+cost = 14
 item_name = "Envy"
-description = "If you only have green cards in your hand, draw a card."
+description = "If all cards in hand are green, draw a card."
 item_type = 2
-passive_trigger = 2
-passive_effect_type = 2
-condition = 2
+passive_rules = Array[Resource("res://Scripts/Item Rules/Passives/passive_rule.gd")]([SubResource("PassiveRule_green")])
 
 [node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
-material = SubResource("ShaderMaterial_s2gvd")
+material = SubResource("ShaderMaterial_envy")
 
 [node name="Frame" parent="Content" parent_id_path=PackedInt32Array(114111459) index="1" unique_id=821193798]
 self_modulate = Color(0, 1, 0, 1)

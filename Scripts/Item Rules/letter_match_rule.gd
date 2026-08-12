@@ -8,7 +8,7 @@ class_name LetterMatch
 @export var last_letter_any: bool = false
 @export var new_letter_any: bool = false
 
-func check_rule(last_card: Card, new_card: Card) -> bool:
+func check_rule(last_card, new_card) -> bool:
 	if last_card == null or new_card == null:
 		return false
 		

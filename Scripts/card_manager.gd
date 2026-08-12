@@ -86,7 +86,7 @@ func draw_cards(num_cards: int):
 		return
 	
 	if item_manager:
-		item_manager.process_passives(PassiveRule.TriggerType.ON_DRAW_AND_PLAY, {
+		item_manager.process_passives(PassiveTrigger.TriggerEvent.ON_DRAW_AND_PLAY, {
 			"card_manager": self,
 			"deck": deck,
 			"hand": hand,
@@ -101,7 +101,7 @@ func _on_card_played(card: Card, old_card: Card):
 		await draw_cards(hand_size)
 		
 	if item_manager:
-		item_manager.process_passives(PassiveRule.TriggerType.ON_CARD_PLAYED, {
+		item_manager.process_passives(PassiveTrigger.TriggerEvent.ON_CARD_PLAYED, {
 			"card_manager": self,
 			"card": card,
 			"old_card": old_card,
@@ -110,7 +110,7 @@ func _on_card_played(card: Card, old_card: Card):
 			"pile": pile,
 			"discard": discard
 		})
-		item_manager.process_passives(PassiveRule.TriggerType.ON_DRAW_AND_PLAY, {
+		item_manager.process_passives(PassiveTrigger.TriggerEvent.ON_DRAW_AND_PLAY, {
 			"card_manager": self,
 			"card": card,
 			"old_card": old_card,
@@ -141,7 +141,7 @@ func _on_card_played(card: Card, old_card: Card):
 
 func shuffle_deck():
 	if item_manager:
-		item_manager.process_passives(PassiveRule.TriggerType.ON_SHUFFLE, {
+		item_manager.process_passives(PassiveTrigger.TriggerEvent.ON_SHUFFLE, {
 			"card_manager": self,
 			"deck": deck,
 			"hand": hand,
@@ -155,16 +155,15 @@ func shuffle_deck():
 	for i in range(cards.size()):
 		deck.move_child(cards[i], i)
 
-func all_cards_in_hand_color(color: Color):
+func all_cards_in_hand_color(target_color: CardEnums.CardColor) -> bool:
 	if hand.get_child_count() == 0:
 		return false
 	
-	var all_match = true
 	for card in hand.get_children():
-		card = card as Card
-		if card.color != color:
-			all_match = false
-	return all_match
+		var c = card as Card
+		if c and c.card_color != target_color:
+			return false
+	return true
 
 func restack_all_cards():
 	for card in hand.get_children():
@@ -194,7 +193,7 @@ func _die_sequence_start():
 
 func _start_new_round():
 	if item_manager:
-		item_manager.process_passives(PassiveRule.TriggerType.ON_ROUND_START, {
+		item_manager.process_passives(PassiveTrigger.TriggerEvent.ON_ROUND_START, {
 			"card_manager": self,
 			"deck": deck,
 			"hand": hand,

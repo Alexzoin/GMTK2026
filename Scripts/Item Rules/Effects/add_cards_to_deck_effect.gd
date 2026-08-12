@@ -1,34 +1,30 @@
-extends PassiveRule
+extends PassiveEffect
 
-class_name AddCardsOnShuffleRule
+class_name AddCardsToDeckEffect
 
+@export var count: int = 10
 @export var criteria_letter: String = ""
 @export var criteria_number: int = -1
-@export var criteria_color: Card.card_colors
+@export var criteria_color: CardEnums.CardColor = CardEnums.CardColor.Pink
 @export var use_color: bool = false
 
-func _init() -> void:
-	trigger = TriggerType.ON_SHUFFLE
-
-func check_and_execute(context: Dictionary) -> bool:
-	var card_manager: CardManager = context.get("card_manager")
-	var item: Item = context.get("item")
-	
+func execute(context: Dictionary) -> void:
+	var card_manager = context.get("card_manager")
 	if not card_manager:
-		return false
+		return
 		
-	for num in range(10):
-		var new_card = card_manager.card_scene.instantiate() as Card
-		var color = Card.colors.pick_random()
+	for i in range(count):
+		var new_card = card_manager.card_scene.instantiate()
+		var color = CardEnums.COLOR_MAP.pick_random()
 		var letter = criteria_letter
 
 		if letter == "" or letter == null:
 			letter = CardManager.ALPHABET.pick_random()
 			
 		if use_color:
-			color = Card.colors[criteria_color]
+			color = CardEnums.get_color(criteria_color)
 			
-		var num_to_add = num
+		var num_to_add = i % 10
 		if criteria_number != -1:
 			num_to_add = criteria_number
 			
@@ -38,8 +34,3 @@ func check_and_execute(context: Dictionary) -> bool:
 		card_manager.deck.add_child(new_card)
 		new_card.global_position = card_manager.deck.global_position
 		new_card.is_basic_card = false
-
-	if item:
-		item.rule_was_used()
-
-	return true

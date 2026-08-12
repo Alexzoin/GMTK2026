@@ -34,7 +34,6 @@ window/stretch/aspect="expand"
 folder_colors={
 "res://Fonts/": "teal",
 "res://Images/": "green",
-"res://Item Rule Resources/": "red",
 "res://Music/": "gray",
 "res://Scenes/": "orange",
 "res://Scripts/": "purple",

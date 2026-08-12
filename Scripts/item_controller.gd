@@ -33,80 +33,13 @@ enum item_types { play_allower, consumable, passive }
 @export var play_allow_rules: Array[AllowPlayRule]
 @export var passive_rules: Array[PassiveRule]
 
-enum passive_trigger_types { on_round_start, on_shuffle, on_draw_and_play, on_card_played }
-@export var passive_trigger: passive_trigger_types
-
-enum passive_effect_types { move_card, add_cards, draw_a_card }
-@export var passive_effect_type: passive_effect_types
-
-@export_enum("hand", "deck", "pile", "discard") var move_card_destination: int
-
-@export var effected_card_criteria_letter: String
-@export var effected_card_criteria_number: int = -1
-@export var effected_card_criteria_color: Card.card_colors
-@export var use_color: bool = false
-
-enum conditions { none, top_card_is_pink, all_hand_green, card_played_was_d }
-@export var condition: conditions
-
 var scene_resource = null
 
-func process_passive_trigger(trigger_type: PassiveRule.TriggerType, context: Dictionary) -> void:
+func process_passive_trigger(event_type: PassiveTrigger.TriggerEvent, context: Dictionary) -> void:
 	context["item"] = self
-	var handled = false
 	for rule in passive_rules:
-		if rule and rule.trigger == trigger_type:
-			if rule.check_and_execute(context):
-				handled = true
-				
-	if not handled:
-		_process_legacy_passive(trigger_type, context)
-
-func _process_legacy_passive(trigger_type: PassiveRule.TriggerType, context: Dictionary) -> void:
-	if item_type != item_types.passive:
-		return
-		
-	var card_manager: CardManager = context.get("card_manager")
-	if not card_manager:
-		return
-		
-	if trigger_type == PassiveRule.TriggerType.ON_DRAW_AND_PLAY:
-		if passive_trigger == passive_trigger_types.on_draw_and_play:
-			if condition == conditions.top_card_is_pink and card_manager.deck.get_child_count() > 0 and (card_manager.deck.get_child(-1) as Card).color == Color.MAGENTA:
-				if passive_effect_type == passive_effect_types.draw_a_card:
-					card_manager.draw_cards(1)
-					rule_was_used()
-			elif condition == conditions.all_hand_green and card_manager.all_cards_in_hand_color(Color.GREEN):
-				if passive_effect_type == passive_effect_types.draw_a_card:
-					card_manager.draw_cards(1)
-					rule_was_used()
-
-	elif trigger_type == PassiveRule.TriggerType.ON_CARD_PLAYED:
-		if passive_trigger == passive_trigger_types.on_draw_and_play or passive_trigger == passive_trigger_types.on_card_played:
-			var card: Card = context.get("card")
-			if condition == conditions.card_played_was_d and card and card.letter == "D":
-				if passive_effect_type == passive_effect_types.draw_a_card:
-					card_manager.draw_cards(1)
-					rule_was_used()
-
-	elif trigger_type == PassiveRule.TriggerType.ON_SHUFFLE:
-		if passive_trigger == passive_trigger_types.on_shuffle:
-			var rule = AddCardsOnShuffleRule.new()
-			rule.criteria_letter = effected_card_criteria_letter
-			rule.criteria_number = effected_card_criteria_number
-			rule.criteria_color = effected_card_criteria_color
-			rule.use_color = use_color
-			rule.check_and_execute(context)
-
-	elif trigger_type == PassiveRule.TriggerType.ON_ROUND_START:
-		if passive_trigger == passive_trigger_types.on_round_start:
-			var rule = MoveCardsOnRoundStartRule.new()
-			rule.criteria_letter = effected_card_criteria_letter
-			rule.criteria_number = effected_card_criteria_number
-			rule.criteria_color = effected_card_criteria_color
-			rule.use_color = use_color
-			rule.destination = move_card_destination
-			rule.check_and_execute(context)
+		if rule:
+			rule.evaluate_and_execute(event_type, context)
 
 var is_hovered: bool = false
 var last_pos: Vector2

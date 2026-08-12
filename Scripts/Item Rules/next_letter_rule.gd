@@ -2,7 +2,7 @@ extends AllowPlayRule
 
 class_name NextLetter
 
-func check_rule(last_card: Card, new_card: Card) -> bool:
+func check_rule(last_card, new_card) -> bool:
 	if last_card == null or new_card == null:
 		return false
 		

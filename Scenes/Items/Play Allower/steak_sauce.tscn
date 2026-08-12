@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://bijwr24umofe2"]
 
 [ext_resource type="PackedScene" uid="uid://cd74kw84il2e7" path="res://Scenes/Items/base_item.tscn" id="1_oi82l"]
-[ext_resource type="Script" uid="uid://vpqmptsepojh" path="res://Scripts/Item Rules/allow_play_rule.gd" id="2_b3bvv"]
-[ext_resource type="Resource" uid="uid://njbekkml6k0t" path="res://Item Rule Resources/1onA.tres" id="3_4wknu"]
+[ext_resource type="Script" path="res://Scripts/Item Rules/number_to_letter_rule.gd" id="2_rule"]
 [ext_resource type="Shader" uid="uid://b0rdg3mncddps" path="res://Shaders/waves.gdshader" id="4_7b51c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oi82l"]
@@ -19,10 +18,15 @@ shader_parameter/stripe_color = Color(1, 0, 1, 1)
 shader_parameter/background_color = Color(0, 0, 0, 1)
 shader_parameter/smooth_edge = true
 
+[sub_resource type="Resource" id="Resource_steak_sauce"]
+script = ExtResource("2_rule")
+new_number = 1
+last_letter = "A"
+
 [node name="SteakSauce" unique_id=1222626534 instance=ExtResource("1_oi82l")]
 item_name = "Steak Sauce"
 description = "A1 You can play 1s on As."
-play_allow_rules = Array[ExtResource("2_b3bvv")]([ExtResource("3_4wknu")])
+play_allow_rules = Array[Resource("res://Scripts/Item Rules/allow_play_rule.gd")]([SubResource("Resource_steak_sauce")])
 
 [node name="Background" parent="Content" parent_id_path=PackedInt32Array(114111459) index="0" unique_id=569854643]
 material = SubResource("ShaderMaterial_oi82l")

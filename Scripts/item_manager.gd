@@ -9,7 +9,7 @@ class_name ItemManager
 
 var item_scenes_in_shop: Array[PackedScene] = []
 
-var owned_items: Array[Item] = []
+var owned_items: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,11 +33,11 @@ func _process(delta: float) -> void:
 		#temp.description_text.visible = false
 	pass
 
-func process_passives(trigger_type: PassiveRule.TriggerType, context: Dictionary) -> void:
+func process_passives(event_type: PassiveTrigger.TriggerEvent, context: Dictionary) -> void:
 	for item in owned_items:
-		item.process_passive_trigger(trigger_type, context)
+		item.process_passive_trigger(event_type, context)
 
-func evaluate_card(new_card: Card) -> bool:
+func evaluate_card(new_card) -> bool:
 	var last_card = card_manager.get_last_played_card()
 	if last_card:
 		return evaluate_play(last_card, new_card)
@@ -45,7 +45,7 @@ func evaluate_card(new_card: Card) -> bool:
 		print("No cards have been played yet.")
 		return false
 
-func evaluate_play(current_card: Card, new_card: Card) -> bool:
+func evaluate_play(current_card, new_card) -> bool:
 	var allow_play: bool = false
 	for item in owned_items:
 		if item.item_type == Item.item_types.play_allower:
@@ -54,7 +54,7 @@ func evaluate_play(current_card: Card, new_card: Card) -> bool:
 				
 	return allow_play
 
-func _on_card_played(new_card: Card, old_card: Card):
+func _on_card_played(new_card, old_card):
 	for item in owned_items:
 		if item.item_type == Item.item_types.play_allower:
 			if item.check_rules(old_card, new_card):
@@ -108,7 +108,7 @@ func hide_shop():
 	$"Item Hand".visible = true
 	$"Shop Items".visible = false
 
-func try_to_purchase(item: Item) -> bool:
+func try_to_purchase(item) -> bool:
 	if item.cost <= ui_manager.total_points:
 		print("enough money buying")
 		ui_manager.total_points -= item.cost

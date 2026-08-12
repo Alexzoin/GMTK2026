@@ -7,7 +7,7 @@ class_name NumberToLetter
 @export var last_letter: String
 @export var new_letter: String
 
-func check_rule(last_card: Card, new_card: Card) -> bool:
+func check_rule(last_card, new_card) -> bool:
 	if last_card == null or new_card == null:
 		return false
 		
