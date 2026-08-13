@@ -23,9 +23,10 @@ var item_manager: ItemManager = null
 @export var cost: int = 1
 @export var item_name: String
 @export var description: String
-@export var item_type: item_types
+@export var item_type: ItemType
 
-enum item_types { play_allower, consumable, passive }
+enum ItemType { PlayAllower, Consumable, Passive }
+enum item_types { PlayAllower, Consumable, Passive }
 #play_allower - adds a condition that allows more cards to be played
 #consumable - does an effect when clicked on eg. "discard all blue cards in hand", "draw another hand_size of cards", "discard the top card of the deck"
 #passive - "Every 3 cards you play, play the top card of the deck", "Wehever you play a blue card, make a random card in your hand blue.", "When you start a new life, remove all A cards from the deck."
@@ -191,7 +192,7 @@ func _on_mouse_entered() -> void:
 		z_index = 1
 		description_text.visible = true
 		
-		if active_tween:
+		if active_tween and active_tween.is_running():
 			active_tween.kill()
 			
 		var tween = create_tween()
@@ -200,26 +201,21 @@ func _on_mouse_entered() -> void:
 		tween.tween_property(name_text, "position", name_text_start_pos, 0.5)
 		
 		active_tween = tween
-	pass
 
 func _on_mouse_exited() -> void:
 	# Emitted when the mouse cursor leaves the button's bounding box.
+	is_hovered = false
+	z_index = 0
+	description_text.visible = false
 	
-	#if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-	if true:
-		is_hovered = false
-		z_index = 0
-		description_text.visible = false
-		
-		if active_tween:
-			active_tween.kill()
-		
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_ELASTIC)
-		tween.tween_property(name_text, "position", name_text_hidden_pos, 1.0)
-		
-		active_tween = tween
-	pass
+	if active_tween and active_tween.is_running():
+		active_tween.kill()
+	
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_property(name_text, "position", name_text_hidden_pos, 1.0)
+	
+	active_tween = tween
 
 func _on_focus_entered() -> void:
 	# Emitted when the button gains keyboard/controller focus.

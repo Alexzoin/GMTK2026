@@ -1,5 +1,5 @@
 extends AllowPlayRule
-class_name NumberMatch
+class_name NumberMatchRule
 
 @export var last_number: int
 @export var new_number: int

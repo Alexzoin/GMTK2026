@@ -1,6 +1,6 @@
 extends AllowPlayRule
 
-class_name LetterMatch
+class_name LetterMatchRule
 
 @export var last_letter: String
 @export var new_letter: String

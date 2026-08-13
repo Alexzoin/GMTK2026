@@ -19,27 +19,27 @@ func _ready() -> void:
 
 func _on_card_played(card: Card, old_card: Card) -> void:
 	if tutorial:
-		tutorial._on_card_played(card, old_card)
+		tutorial.on_card_played(card, old_card)
 	if item_manager:
-		item_manager._on_card_played(card, old_card)
+		item_manager.on_card_played(card, old_card)
 
 func _on_game_over(score: int) -> void:
 	if tutorial:
-		tutorial._on_no_remaining_playable_cards(score)
+		tutorial.on_no_remaining_playable_cards(score)
 	if ui:
-		ui._on_game_over(score)
+		ui.on_game_over(score)
 
 func _on_game_won() -> void:
 	if ui:
-		ui._on_game_won()
+		ui.on_game_won()
 	if tutorial:
-		tutorial._on_win_game()
+		tutorial.on_win_game()
 
 func _on_die_sequence_start() -> void:
 	if tutorial:
 		tutorial.hide_all()
 	if card_manager:
-		card_manager._die_sequence_start()
+		card_manager.die_sequence_start()
 	if item_manager:
 		item_manager.go_to_shop()
 
@@ -47,4 +47,4 @@ func _on_start_again() -> void:
 	if item_manager:
 		item_manager.hide_shop()
 	if card_manager:
-		card_manager._start_new_round()
+		card_manager.start_new_round()

@@ -1,5 +1,5 @@
 extends AllowPlayRule
-class_name ColorMatch
+class_name ColorMatchRule
 
 @export var last_color: CardEnums.CardColor = CardEnums.CardColor.Pink
 @export var new_color: CardEnums.CardColor = CardEnums.CardColor.Pink

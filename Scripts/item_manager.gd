@@ -5,33 +5,26 @@ class_name ItemManager
 @export var all_items: Array[PackedScene]
 @export var num_items_in_shop: int = 3
 
+@export var shop_items_container: Node
+@export var item_hand_container: Node
+
 @onready var item_pool: Array[PackedScene] = all_items.duplicate_deep()
 
 var item_scenes_in_shop: Array[PackedScene] = []
 
-var owned_items: Array = []
+var owned_items: Array[Item] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$"Shop Items".visible = false
-	$"Item Hand".visible = true
-
-var has_spawned = false
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#if Input.is_key_pressed(Key.KEY_S):
-		#empty_shop()
-		#populate_shop()
-	#if Input.is_key_pressed(Key.KEY_I) and not has_spawned:
-		#has_spawned = true
-		#var temp = item_pool[28].instantiate()
-		#$"Item Hand".add_child(temp)
-		#temp.position = Vector2(randf() * 128, randf() * 128)
-		#owned_items.append(temp)
-		#temp.is_in_shop = false
-		#temp.cost_text.visible = false
-		#temp.description_text.visible = false
-	pass
+	if shop_items_container == null and has_node("Shop Items"):
+		shop_items_container = $"Shop Items"
+	if item_hand_container == null and has_node("Item Hand"):
+		item_hand_container = $"Item Hand"
+		
+	if shop_items_container:
+		shop_items_container.visible = false
+	if item_hand_container:
+		item_hand_container.visible = true
 
 func process_passives(event_type: PassiveTrigger.TriggerEvent, context: Dictionary) -> void:
 	for item in owned_items:
@@ -48,19 +41,17 @@ func evaluate_card(new_card) -> bool:
 func evaluate_play(current_card, new_card) -> bool:
 	var allow_play: bool = false
 	for item in owned_items:
-		if item.item_type == Item.item_types.play_allower:
+		if item.item_type == Item.ItemType.PlayAllower:
 			if item.check_rules(current_card, new_card):
 				allow_play = true
 				
 	return allow_play
 
-func _on_card_played(new_card, old_card):
+func on_card_played(new_card, old_card):
 	for item in owned_items:
-		if item.item_type == Item.item_types.play_allower:
+		if item.item_type == Item.ItemType.PlayAllower:
 			if item.check_rules(old_card, new_card):
 				item.rule_was_used()
-				
-		
 
 func populate_shop():
 	var num_items_to_add = num_items_in_shop
@@ -82,7 +73,8 @@ func populate_shop():
 	var count = 0
 	for item in item_scenes_in_shop:
 		var temp = item.instantiate()
-		$"Shop Items".add_child(temp)
+		if shop_items_container:
+			shop_items_container.add_child(temp)
 		temp.position = Vector2(count * 256, 0)
 		temp.scene_resource = item
 		temp.item_manager = self
@@ -92,27 +84,31 @@ func populate_shop():
 func empty_shop():
 	item_scenes_in_shop = []
 	
-	for item in $"Shop Items".get_children():
-		item.queue_free()
+	if shop_items_container:
+		for item in shop_items_container.get_children():
+			item.queue_free()
 	
 func go_to_shop():
 	print("go to shop")
-	#hide player items
-	# populate shop with items and show
 	populate_shop()
-	$"Item Hand".visible = false
-	$"Shop Items".visible = true
+	if item_hand_container:
+		item_hand_container.visible = false
+	if shop_items_container:
+		shop_items_container.visible = true
 
 func hide_shop():
 	empty_shop()
-	$"Item Hand".visible = true
-	$"Shop Items".visible = false
+	if item_hand_container:
+		item_hand_container.visible = true
+	if shop_items_container:
+		shop_items_container.visible = false
 
 func try_to_purchase(item) -> bool:
 	if item.cost <= ui_manager.total_points:
 		print("enough money buying")
 		ui_manager.total_points -= item.cost
-		item.reparent($"Item Hand")
+		if item_hand_container:
+			item.reparent(item_hand_container)
 		item.position = Vector2(randf() * 128, randf() * 128)
 		owned_items.append(item)
 		

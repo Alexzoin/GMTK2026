@@ -1,6 +1,6 @@
 extends AllowPlayRule
 
-class_name NextLetter
+class_name NextLetterRule
 
 func check_rule(last_card, new_card) -> bool:
 	if last_card == null or new_card == null:

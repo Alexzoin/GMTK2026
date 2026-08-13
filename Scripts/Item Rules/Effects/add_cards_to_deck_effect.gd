@@ -30,7 +30,7 @@ func execute(context: Dictionary) -> void:
 			
 		new_card.init_card(letter, num_to_add, color, card_manager.item_manager)
 		new_card.set_parent_references(card_manager.hand, card_manager.deck, card_manager.pile, card_manager.discard)
-		new_card.card_played.connect(card_manager._on_card_played)
+		new_card.card_played.connect(card_manager.on_card_played)
 		card_manager.deck.add_child(new_card)
 		new_card.global_position = card_manager.deck.global_position
 		new_card.is_basic_card = false

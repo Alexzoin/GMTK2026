@@ -22,7 +22,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_card_played(card: Card, old_card: Card):
+func on_card_played(card: Card, old_card: Card):
 	cards_played += 1
 	
 	for text_node in show_text_at_card_number.values():
@@ -31,10 +31,10 @@ func _on_card_played(card: Card, old_card: Card):
 	if show_text_at_card_number.has(cards_played):
 		show_text_at_card_number[cards_played].visible = true
 		
-func _on_no_remaining_playable_cards(score: int):
+func on_no_remaining_playable_cards(score: int):
 	kill_text.visible = true
 
-func _on_win_game():
+func on_win_game():
 	win_text.visible = true
 
 func hide_all():

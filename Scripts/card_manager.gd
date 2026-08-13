@@ -28,15 +28,6 @@ func _ready() -> void:
 	create_deck()
 	
 	await draw_cards(hand_size)
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed("ui_accept"):
-		#draw_cards(hand_size)
-	#if Input.is_key_pressed(Key.KEY_R):
-		#get_tree().reload_current_scene()
-	pass
 
 func get_top_pile_card() -> Card:
 	return pile.get_child(pile.get_child_count() - 1)
@@ -47,7 +38,7 @@ func create_deck() -> void:
 			var new_card = card_scene.instantiate() as Card
 			new_card.init_card(letter, num, Card.colors.pick_random(), item_manager)
 			new_card.set_parent_references(hand, deck, pile, discard)
-			new_card.card_played.connect(_on_card_played)
+			new_card.card_played.connect(on_card_played)
 			deck.add_child(new_card)
 			new_card.global_position = deck.global_position
 			new_card.is_basic_card = true
@@ -94,7 +85,7 @@ func draw_cards(num_cards: int):
 			"discard": discard
 		})
 		
-func _on_card_played(card: Card, old_card: Card):
+func on_card_played(card: Card, old_card: Card):
 	card_played_signal.emit(card, old_card)
 	print(card.letter + " " + str(card.number))
 	if hand.get_child_count() == 0:
@@ -149,7 +140,10 @@ func shuffle_deck():
 			"discard": discard
 		})
 	
-	var cards = deck.get_children()
+	var cards: Array[Node] = []
+	for c in deck.get_children():
+		if not c.is_queued_for_deletion():
+			cards.append(c)
 	cards.shuffle()
 	
 	for i in range(cards.size()):
@@ -183,15 +177,16 @@ func restack_all_cards():
 		card.set_display_as_playable(true)
 		
 		if not card.is_basic_card:
+			deck.remove_child(card)
 			card.queue_free()
 		
 	shuffle_deck()
 
-func _die_sequence_start():
+func die_sequence_start():
 	restack_all_cards()
 	#Animate points scoring, send hand offscreen one by one, tween deck off screen left.
 
-func _start_new_round():
+func start_new_round():
 	if item_manager:
 		item_manager.process_passives(PassiveTrigger.TriggerEvent.ON_ROUND_START, {
 			"card_manager": self,

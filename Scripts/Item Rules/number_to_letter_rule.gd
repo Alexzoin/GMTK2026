@@ -1,5 +1,5 @@
 extends AllowPlayRule
-class_name NumberToLetter
+class_name NumberToLetterRule
 
 @export var last_number: int = -1
 @export var new_number: int = -1

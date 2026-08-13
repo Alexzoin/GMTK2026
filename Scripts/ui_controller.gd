@@ -35,13 +35,13 @@ func _on_die_button_pressed() -> void:
 	
 	die_sequence_start.emit()
 
-func _on_game_over(score: int):
+func on_game_over(score: int):
 	last_round_score = score
 	$"Die Button".visible = true
 	SoundManager.play(preload("res://Sounds/MenuError.wav"))
 	
 
-func _on_game_won():
+func on_game_won():
 	$"Restart Button".visible = true
 
 func _on_live_again_button_pressed() -> void:

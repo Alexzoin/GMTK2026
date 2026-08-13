@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cb3w4ic4p4nk8"]
 
 [ext_resource type="Script" uid="uid://c2uoe8uk57s0y" path="res://Scripts/card_manager.gd" id="1_y8epe"]
-[ext_resource type="Script" uid="uid://dv7mq6chk3qhp" path="res://Scenes/pile.gd" id="2_y8epe"]
+[ext_resource type="Script" uid="uid://dv7mq6chk3qhp" path="res://Scripts/pile.gd" id="2_y8epe"]
 
 [node name="Card UI" type="CanvasLayer" unique_id=542603436 node_paths=PackedStringArray("hand", "deck", "pile", "discard")]
 script = ExtResource("1_y8epe")
